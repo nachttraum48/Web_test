@@ -8,7 +8,9 @@
 <title>Insert title here</title>
 <script
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script></script>
+<script>
+
+</script>
 </head>
 
 <body>
@@ -25,7 +27,13 @@
 		<td>${m.useridx}</td>
 		<td>${m.username}</td>
 		<td>${m.userid}</td>
-		<td><a href="/User/DetailUser?userid=${m.userid}" style="color:blue">보기</a></td>
+		<td>
+		    <form action="/User/DetailUser" method="POST">
+		    	<input type="hidden" value="${m.userid}" name="userid">
+		    	<input type="submit" value="보기">
+		    </form>
+			<!-- <a href="/User/DetailUser?userid=${m.userid}" style="color:blue">보기</a> -->
+		</td>
 		</tr>
 		</c:forEach>
 	</table>
