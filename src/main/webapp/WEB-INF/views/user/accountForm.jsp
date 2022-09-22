@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
 <script
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
@@ -30,7 +31,7 @@
 
 <body>
 	<h2>회원가입</h2>
-	<form action="/User/Account" id="form1" method="POST">
+	<form action="/User/Account" id="form2" method="POST">
 		<span>이름</span> <input type="text" maxlength="20" name="username" id="username">
 		<br>
 		<span>ID</span> <input type="text" maxlength="20" name="userid">

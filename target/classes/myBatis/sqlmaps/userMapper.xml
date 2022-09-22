@@ -10,8 +10,14 @@
  		VALUES (#{username}, #{userid}, #{userpw}, SYSDATE)
  	</insert>
  	
+ 	<select id="login" resultType="HashMap">
+		SELECT USERID,
+		  TO_CHAR(USERPW) AS USERPW
+		FROM ACCOUNT_USER WHERE USERID LIKE #{userid} AND USERPW LIKE #{userpw}
+	</select>
+ 	
 	<select id="userList" resultType="com.basic.user.vo.UserVo">
-		SELECT * FROM ACCOUNT_USER
+		SELECT * FROM ACCOUNT_USER ORDER BY USERIDX
 	</select>
 	
 	<select id="detailUser" resultType="HashMap">

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
 <script
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
@@ -53,5 +54,7 @@
 		</form>
 	<!-- <a href="/User/UpdateUserForm?username=${detailUser.USERNAME}&userid=${detailUser.USERID}">수정</a> -->
 	<!-- <a href="/User/DeleteUser?userid=${detailUser.USERID}">삭제</a> -->
+	<br>
+	<a href="/">메인화면</a>
 </body>
 </html>

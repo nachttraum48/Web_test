@@ -17,6 +17,15 @@ public class UserDaoImpl implements UserDao {
 	private SqlSession sqlSession;
 
 	@Override
+	public HashMap<String, Object> loginCheck(HashMap<String, Object> map) {
+		System.out.println("로그인 정보 조회 - DAO 바티스 전");
+		HashMap<String, Object> userInfo = sqlSession.selectOne("User.login", map);
+		System.out.println("로그인 정보 조회 - DAO 바티스 후");
+		System.out.println(userInfo);
+		return userInfo;
+	}
+
+	@Override
 	public void account(HashMap<String, Object> map) {
 		// System.out.println("UserDaoImpl account response map = " + map);
 		System.out.println("회원가입 - DAO 바티스 전");

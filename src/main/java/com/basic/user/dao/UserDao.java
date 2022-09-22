@@ -7,6 +7,8 @@ import com.basic.user.vo.UserVo;
 
 public interface UserDao {
 	
+	HashMap<String, Object> loginCheck(HashMap<String, Object> map);
+	
 	void account(HashMap<String, Object> map);
 	
 	List<UserVo> list();

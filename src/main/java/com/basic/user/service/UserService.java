@@ -6,6 +6,8 @@ import java.util.List;
 import com.basic.user.vo.UserVo;
 
 public interface UserService {
+	// 로그인
+	HashMap<String, Object> loginCheck(HashMap<String, Object> map);
 	// 회원가입
 	void account(HashMap<String, Object> map);
 	// 회원조회

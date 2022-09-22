@@ -17,6 +17,15 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 	
 	@Override
+	public HashMap<String, Object> loginCheck(HashMap<String, Object> map) {
+		System.out.println("로그인 정보 조회 - Service 바티스 전");
+		HashMap<String, Object> userInfo = userDao.loginCheck(map);
+		System.out.println("로그인 정보 조회 - Service 바티스 후");
+		System.out.println(userInfo);
+		return userInfo;
+	}
+
+	@Override
 	public void account(HashMap<String, Object> map) {
 		// System.out.println("UserServiceImpl account response map = " + map);
 		System.out.println("회원가입 - Service 바티스 전");
