@@ -11,8 +11,7 @@
  	</insert>
  	
  	<select id="login" resultType="HashMap">
-		SELECT USERID,
-		  TO_CHAR(USERPW) AS USERPW
+		SELECT TO_CHAR(USERNAME) AS USERNAME, USERID
 		FROM ACCOUNT_USER WHERE USERID LIKE #{userid} AND USERPW LIKE #{userpw}
 	</select>
  	

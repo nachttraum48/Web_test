@@ -20,7 +20,7 @@
 		<a href="User/Login">로그인</a>
 	</c:if>
 	<c:if test="${user != null}">
-		<p>${user.USERID}님 반갑습니다.<p><br>
+		<p>${user.USERNAME}님 반갑습니다.<p><br>
 		<a href="User/Logout">로그아웃</a>
 		<a href="User/UserList">회원목록</a>
 	</c:if>	

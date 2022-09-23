@@ -50,14 +50,13 @@ public class UserController {
 			rttr.addFlashAttribute("msg", false);
 			System.out.println("유저 컨트롤러 - 로그인 실패");
 			mv.setViewName("redirect:/User/Login");
-			return mv;
 		} else {
 			session.setAttribute("user", userInfo);
 			System.out.println("유저 컨트롤러 - 로그인 성공");
 			mv.setViewName("redirect:/");
-			return mv;
 		}
 		
+		return mv;
 	}
 	
 	@RequestMapping("/Logout")
