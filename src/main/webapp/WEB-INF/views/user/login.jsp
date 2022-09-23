@@ -16,7 +16,7 @@
 
 <body>
 	<h2>로그인</h2>
-	<form action="/User/LoginCheck" id="form1" method="POST">
+	<form action="/User/LoginCheck" method="POST">
 		<c:if test="${msg == false}">
 			<p style="color: red;">로그인 실패! 아이디와 비밀번호 확인해주세요.</p>
 		</c:if>

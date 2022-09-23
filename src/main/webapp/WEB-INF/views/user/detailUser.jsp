@@ -48,7 +48,7 @@
 		   <input type="submit" value="수정">
 		</form>
 	<br>
-		<form action="/User/DetailUser" method="POST">
+		<form action="/User/DeleteUser" method="POST">
 		   <input type="hidden" value="${detailUser.USERID}" name="userid">
 		   <input type="submit" value="삭제">
 		</form>

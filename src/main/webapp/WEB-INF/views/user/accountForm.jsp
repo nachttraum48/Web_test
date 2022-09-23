@@ -44,7 +44,7 @@
 
 <body>
 	<h2>회원가입</h2>
-	<form action="/User/Account" id="form2" method="POST">
+	<form action="/User/Account" method="POST">
 		<span>이름</span> <input type="text" maxlength="20" name="username" id="username">
 		<br>
 		<span>ID</span> <input type="text" maxlength="20" name="userid" id="userid">

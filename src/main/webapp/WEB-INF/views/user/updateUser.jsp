@@ -19,23 +19,27 @@
          var userpw = userpwEl.value
          
          
-         if ( username == null || username == '' ){
-	         alert('이름을 입력해주세요.');
-	         usernameEl.focus();
-	         return false;
-	         
-         } else if ( userid == null || userid == '' ){
-	         alert('아이디를 입력해주세요.');
-	         useridEl.focus();
-	         return false;
-	         
-         } else if ( userpw == null || userpw == '' ){
-	         alert('비밀번호를 입력해주세요.');
-	         userpwEl.focus();
-	         return false;
-	         
+         if (confirm('수정하시겠습니까?')) {
+	         if ( username == null || username == '' ){
+		         alert('이름을 입력해주세요.');
+		         usernameEl.focus();
+		         return false;
+		         
+	         } else if ( userid == null || userid == '' ){
+		         alert('아이디를 입력해주세요.');
+		         useridEl.focus();
+		         return false;
+		         
+	         } else if ( userpw == null || userpw == '' ){
+		         alert('비밀번호를 입력해주세요.');
+		         userpwEl.focus();
+		         return false;
+		         
+	         } else {
+	            alert('회원정보가 수정되었습니다.');
+	         }
          } else {
-            alert('회원정보가 수정되었습니다.');
+        	 return false;
          }
       })
    
@@ -45,7 +49,7 @@
 <body>
 	<h2>회원정보 수정</h2>
 	<h6>ID는 수정이 불가합니다!</h6>
-	<form action="/User/UpdateUser" id="form3" method="POST">
+	<form action="/User/UpdateUser" method="POST">
 		<span>이름</span> <input value="${updateUser.username}" maxlength="20" name="username" id="username">
 		<br>
 		<span>ID</span> <input value="${updateUser.userid}" name="userid" id="userid" readonly="readonly">
