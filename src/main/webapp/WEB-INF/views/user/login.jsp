@@ -26,7 +26,7 @@
 		<br>
 		<input type="submit" value="로그인">
 	</form>
-	<a href="User/AccountForm">회원가입</a>
+	<a href="/User/AccountForm">회원가입</a>
 	<a href="/">메인화면</a>
 </body>
 </html>
