@@ -9,12 +9,7 @@
  		INSERT INTO ACCOUNT_USER(USERNAME, USERID, USERPW, USERINDATE)
  		VALUES (#{username}, #{userid}, #{userpw}, SYSDATE)
  	</insert>
- 	
- 	<select id="login" resultType="HashMap">
-		SELECT TO_CHAR(USERNAME) AS USERNAME, USERID
-		FROM ACCOUNT_USER WHERE USERID LIKE #{userid} AND USERPW LIKE #{userpw}
-	</select>
- 	
+	 	
 	<select id="userList" resultType="com.basic.user.vo.UserVo">
 		SELECT * FROM ACCOUNT_USER ORDER BY USERIDX
 	</select>
@@ -24,7 +19,7 @@
 		  TO_CHAR(USERNAME) AS USERNAME, USERID,
 		  TO_CHAR(USERPW) AS USERPW,
 		  TO_CHAR(USERINDATE) AS USERINDATE,
-		  TO_CHAR(USERUPDATE) AS USERUPDATE
+		  TO_CHAR(NVL(USERUPDATE, ' - ')) AS USERUPDATE
 		FROM ACCOUNT_USER WHERE USERID LIKE #{userid}
 	</select>
 	

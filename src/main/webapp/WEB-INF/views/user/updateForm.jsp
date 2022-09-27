@@ -13,8 +13,6 @@
       $(document).submit(function(e){
          var usernameEl = document.getElementById('username');
          var username = usernameEl.value
-         var useridEl = document.getElementById('userid');
-         var userid = useridEl.value
          var userpwEl = document.getElementById('userpw');
          var userpw = userpwEl.value
          
@@ -24,13 +22,8 @@
 		         alert('이름을 입력해주세요.');
 		         usernameEl.focus();
 		         return false;
-		         
-	         } else if ( userid == null || userid == '' ){
-		         alert('아이디를 입력해주세요.');
-		         useridEl.focus();
-		         return false;
-		         
-	         } else if ( userpw == null || userpw == '' ){
+	         }
+	         if ( userpw == null || userpw == '' ){
 		         alert('비밀번호를 입력해주세요.');
 		         userpwEl.focus();
 		         return false;
@@ -49,10 +42,10 @@
 <body>
 	<h2>회원정보 수정</h2>
 	<h6>ID는 수정이 불가합니다!</h6>
-	<form action="/User/UpdateUser" method="POST">
-		<span>이름</span> <input value="${updateUser.username}" maxlength="20" name="username" id="username">
+	<form action="/User/Update" method="POST">
+		<span>이름</span> <input value="${update.username}" maxlength="20" name="username" id="username">
 		<br>
-		<span>ID</span> <input value="${updateUser.userid}" name="userid" id="userid" readonly="readonly">
+		<span>ID</span> <input value="${update.userid}" name="userid" readonly="readonly">
 		<br>
 		<span>PW</span> <input type="password" placeholder="새 비밀번호 입력" maxlength="20" name="userpw" id="userpw">
 		<br>

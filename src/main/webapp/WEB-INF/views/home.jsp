@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,14 +14,7 @@
 </head>
 
 <body>
-	<h2>홈페이지</h2>
-	<c:if test="${user == null}">
-		<a href="/User/Login">로그인</a>
-	</c:if>
-	<c:if test="${user != null}">
-		<p>${user.USERNAME}님 반갑습니다.<p><br>
-		<a href="/User/Logout">로그아웃</a>
-		<a href="/User/UserList">회원목록</a>
-	</c:if>	
+	<h2>home</h2>
+	<a href="/Login/LoginForm">로그인</a>
 </body>
 </html>

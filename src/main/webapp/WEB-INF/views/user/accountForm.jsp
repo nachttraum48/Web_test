@@ -17,19 +17,23 @@
 	    var userid = useridEl.value
 	    var userpwEl = document.getElementById('userpw');
 	    var userpw = userpwEl.value
-	    
-	    
+		var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+		
+	    if ( !idReg.test( userid ) ) {
+	        alert("아이디는 영문자로 시작하는 6 ~ 20의 영문자 또는 숫자이어야 합니다.");
+	        return false;
+	    }
 	    if ( username == null || username == '' ){
 	        alert('이름을 입력해주세요.');
 	        usernameEl.focus();
 	        return false;
-	        
-	    } else if ( userid == null || userid == '' ){
+	    }
+	    if ( userid == null || userid == '' ){
 	        alert('아이디를 입력해주세요.');
 	        useridEl.focus();
 	        return false;
-	        
-	    } else if ( userpw == null || userpw == '' ){
+	    }
+	    if ( userpw == null || userpw == '' ){
 	        alert('비밀번호를 입력해주세요.');
 	        userpwEl.focus();
 	        return false;

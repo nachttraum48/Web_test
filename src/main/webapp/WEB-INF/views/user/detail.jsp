@@ -42,18 +42,16 @@
 		</tr>
 	</table>
 	<br>
-		<form action="/User/UpdateUserForm" method="POST">
-		   <input type="hidden" value="${detailUser.USERNAME}" name="username">
-		   <input type="hidden" value="${detailUser.USERID}" name="userid">
+		<form action="/User/UpdateForm" method="POST">
+		   <input type="hidden" value="${detail.USERNAME}" name="username">
+		   <input type="hidden" value="${detail.USERID}" name="userid">
 		   <input type="submit" value="수정">
 		</form>
 	<br>
-		<form action="/User/DeleteUser" method="POST">
-		   <input type="hidden" value="${detailUser.USERID}" name="userid">
+		<form action="/User/Delete" method="POST">
+		   <input type="hidden" value="${detail.USERID}" name="userid">
 		   <input type="submit" value="삭제">
 		</form>
-	<!-- <a href="/User/UpdateUserForm?username=${detailUser.USERNAME}&userid=${detailUser.USERID}">수정</a> -->
-	<!-- <a href="/User/DeleteUser?userid=${detailUser.USERID}">삭제</a> -->
 	<br>
 	<a href="/">메인화면</a>
 </body>

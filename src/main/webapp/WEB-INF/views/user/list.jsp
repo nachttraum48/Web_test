@@ -29,11 +29,10 @@
 		<td>${m.username}</td>
 		<td>${m.userid}</td>
 		<td>
-		    <form action="/User/DetailUser" method="POST">
+		    <form action="/User/Detail" method="POST">
 		    	<input type="hidden" value="${m.userid}" name="userid">
 		    	<input type="submit" value="보기">
 		    </form>
-			<!-- <a href="/User/DetailUser?userid=${m.userid}" style="color:blue">보기</a> -->
 		</td>
 		</tr>
 		</c:forEach>
