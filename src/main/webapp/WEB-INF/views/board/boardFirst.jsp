@@ -11,6 +11,12 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	
+	function logout() {
+		if (!confirm('로그아웃 하시겠습니까?')) {
+			return false;
+		}
+	}
+	
 </script>
 </head>
 
@@ -18,15 +24,30 @@
 	<% 
 		UserVo userInfo = (UserVo) request.getAttribute("user");
 		String username = userInfo.getUsername();
+		String userid = userInfo.getUserid();
 		String adminToken = userInfo.getAdminToken();
+		
+		if (adminToken != null) {
 	%>
-	<h2><%=username %>님 안녕하세요.</h2>
-	
-	<% if (adminToken.equals("0")) { %>
-	<a href="/Login/Logout">로그아웃</a>
-	<% } else if (adminToken.equals("1")) { %>
-	<a href="/Login/Logout">로그아웃</a>
-	<a href="/User/List">회원목록</a>
+		 <h2><strong style="color:royalblue"><%=username %></strong>님 안녕하세요.</h2>
+		 
+		 <form style="float:left; margin-right:10px;" action="/Login/Logout" method="POST" onsubmit="return logout();">
+		 	<input type="submit" value="로그아웃">
+		 </form>
+		 
+		 <% if (adminToken.equals("0")) { %>
+		 <form action="/User/Detail" method="POST">
+		 	<input type="hidden" value="<%=userid %>" name="userid">
+		 	<input type="submit" value="마이페이지">
+		 </form>
+		 <% } %>
+		 
+		 <% if (adminToken.equals("1")) { %>
+		 <form action="/User/List" method="POST">
+		 	<input type="submit" value="회원목록">
+		 </form>
+		 <% } %>
+		 
 	<% } %>
 	
 </body>

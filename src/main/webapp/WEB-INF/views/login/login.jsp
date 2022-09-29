@@ -35,10 +35,11 @@
 <body>
 	<h2>로그인</h2>
 	<form action="/Login/Login" method="POST">
-		<p style="color: red;">${msg}<p>
+		<p style="color:red;">${msg}<p>
 		<span>ID</span>	<input type="text" maxlength="20" name="userid" id="userid">
 		<br>
 		<span>PW</span>	<input type="password" maxlength="20" name="userpw" id="userpw">
+		<br>
 		<br>
 		<input type="submit" value="로그인">
 	</form>

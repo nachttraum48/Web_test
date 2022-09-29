@@ -61,6 +61,7 @@ public class LoginController {
 			mv.addObject("user", userInfo);
 			mv.setViewName("board/boardFirst");
 		
+		// id, pw 잘못 입력했을 때
 		} else if (userInfo == null) {
 			
 			// 오류메시지 출력 후 재 로그인 설정

@@ -73,18 +73,31 @@ public class UserController {
 		return mv;
 	}
 	
+	// 일반 유저 - 탈퇴하기
 	@RequestMapping("/Delete")
-//	public ModelAndView deleteUser(String userid) {
+//	public ModelAndView deleteUser(String userid) { 고치세용ㄹ!!!
 	public ModelAndView deleteUser(@RequestParam HashMap<String, Object> map) {
 		System.out.println("유저 컨트롤러 - 회원탈퇴 함수 도착");
-		System.out.println("delete map = " + map);
+		System.out.println("일반 유저 탈퇴 map = " + map);
 		ModelAndView mv = new ModelAndView();
 		userService.delete(map);
 		mv.setViewName("redirect:/Login/LoginForm");
 		return mv;
 	}
 	
-	// 개선해야됨
+	// 관리자 - 유저 추방하기
+	@RequestMapping("/DeleteAdmin")
+//	public ModelAndView deleteAdmin(String userid) { 고치세용ㄹ!!!
+	public ModelAndView deleteAdmin(@RequestParam HashMap<String, Object> map) {
+		System.out.println("유저 컨트롤러 - 회원탈퇴 함수 도착");
+		System.out.println("관리자 회원 추방 map = " + map);
+		ModelAndView mv = new ModelAndView();
+		userService.delete(map);
+		mv.setViewName("redirect:/User/List");
+		return mv;
+	}
+	
+	// 바티스까지 보내도록 개선해야됨
 	@RequestMapping("/UpdateForm")
 	public ModelAndView updateUserForm(@RequestParam HashMap<String, Object> map) {
 		System.out.println("유저 컨트롤러 - 회원정보 수정 함수 도착");
