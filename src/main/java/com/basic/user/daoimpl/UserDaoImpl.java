@@ -18,7 +18,6 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public void account(HashMap<String, Object> map) {
-		// System.out.println("UserDaoImpl account response map = " + map);
 		System.out.println("회원가입 - Dao 바티스 전");
 		sqlSession.insert("User.account", map);
 		System.out.println("회원가입 - Dao 바티스 후");
@@ -31,7 +30,7 @@ public class UserDaoImpl implements UserDao {
 		System.out.println("id 중복 체크 - Dao 바티스 후");
 		boolean result = false;
 		
-		// id가 중복일 때 - 바티스에서 같은 id 값이 검출되었을 때
+		// id가 중복일 때 -> 바티스에서 같은 id 값이 검출되었을 때
 		if (count == 1) {
 			result = false;
 			
@@ -48,7 +47,6 @@ public class UserDaoImpl implements UserDao {
 		System.out.println("회원목록 조회 - Dao 바티스 전");
 		List<UserVo> list = sqlSession.selectList("User.list");
 		System.out.println("회원목록 조회 - Dao 바티스 후");
-		System.out.println(list);
 		return list;
 	}
 
@@ -57,7 +55,6 @@ public class UserDaoImpl implements UserDao {
 		System.out.println("회원 상세정보 조회 - Dao 바티스 전");
 		UserVo detail = sqlSession.selectOne("User.detail", userid);
 		System.out.println("회원 상세정보 조회 - Dao 바티스 후");
-		System.out.println(detail);
 		return detail;
 	}
 

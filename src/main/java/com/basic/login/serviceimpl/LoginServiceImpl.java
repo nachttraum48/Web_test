@@ -15,10 +15,10 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public UserVo login(String userid, String userpw) {
-		System.out.println("로그인 Service 입력 값 - userid : " + userid + ", userpw : " + userpw);
-		UserVo userInfo = loginDao.login(userid, userpw);
-		System.out.println("로그인 Service 들고온 값 - userid : " + userid + ", userpw : " + userpw);
-		return userInfo;
+		System.out.println("로그인 Service 바티스 전");
+		UserVo loginUser = loginDao.login(userid, userpw);
+		System.out.println("로그인 Service 바티스 후");
+		return loginUser;
 	}
 
 }

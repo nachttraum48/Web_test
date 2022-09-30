@@ -18,7 +18,6 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public void account(HashMap<String, Object> map) {
-		// System.out.println("UserServiceImpl account response map = " + map);
 		System.out.println("회원가입 - Service 바티스 전");
 		userDao.account(map);
 		System.out.println("회원가입 - Service 바티스 후");
@@ -37,7 +36,6 @@ public class UserServiceImpl implements UserService {
 		System.out.println("회원목록 조회 - Service 바티스 전");
 		List<UserVo> list = userDao.list();
 		System.out.println("회원목록 조회 - Service 바티스 후");
-		System.out.println(list);
 		return list;
 	}
 
@@ -46,7 +44,6 @@ public class UserServiceImpl implements UserService {
 		System.out.println("회원 상세정보 조회 - Service 바티스 전");
 		UserVo detail = userDao.detail(userid);
 		System.out.println("회원 상세정보 조회 - Service 바티스 후");
-		System.out.println(detail);
 		return detail;
 	}
 

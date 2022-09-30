@@ -59,22 +59,27 @@
 		</tr>
 	</table>
 	<br>
-		<c:if test="${detail.adminToken eq '0'}">
-			<form style="float:left; margin-right:10px;" action="/User/UpdateForm" method="POST">
-			   <input type="hidden" value="${detail.userid}" name="userid">
-			   <input type="submit" value="수정">
-			</form>
-			<form action="/User/Delete" method="POST" onsubmit="return deleteUser();">
-			   <input type="hidden" value="${detail.userid}" name="userid">
-			   <input type="submit" value="탈퇴">
-			</form>
-		</c:if>
-		
-		<c:if test="${detail.adminToken eq '1'}">
-			<form action="/User/DeleteAdmin" method="POST" onsubmit="return deleteAdmin();">
-			   <input type="hidden" value="${detail.userid}" name="userid">
-			   <input type="submit" value="추방">
-			</form>
+		<c:if test="${detail.adminToken ne null}">
+			
+			<c:if test="${detail.adminToken eq '0'}">
+				<form style="float:left; margin-right:10px;" action="/User/UpdateForm" method="POST">
+				   <input type="hidden" value="${detail.userid}" name="userid">
+				   <input type="submit" value="수정">
+				</form>
+				<form action="/User/Delete" method="POST" onsubmit="return deleteUser();">
+				   <input type="hidden" value="${detail.userid}" name="userid">
+				   <input type="submit" value="탈퇴">
+				</form>
+			</c:if>
+			
+			<!-- 뒤에 조건은 관리자를 삭제 못하게 설정한 것 -->
+			<c:if test="${detail.adminToken eq '1' && detail.userid ne 'admin'}">
+				<form action="/User/DeleteAdmin" method="POST" onsubmit="return deleteAdmin();">
+				   <input type="hidden" value="${detail.userid}" name="userid">
+				   <input type="submit" value="추방">
+				</form>
+			</c:if>
+			
 		</c:if>
 	<br>
 	<a href="/">메인화면</a>

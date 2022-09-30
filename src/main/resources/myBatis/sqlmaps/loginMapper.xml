@@ -5,7 +5,7 @@
   
  <mapper namespace="Login">
  
- 	<select id="loginCheck" resultType="com.basic.user.vo.UserVo">
+ 	<select id="loginUser" resultType="com.basic.user.vo.UserVo">
 		SELECT USERIDX,
 		  TO_CHAR(USERNAME) AS USERNAME, USERID,
 		  TO_CHAR(USERPW) AS USERPW,

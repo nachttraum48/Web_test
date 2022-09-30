@@ -97,7 +97,6 @@ public class UserController {
 		return mv;
 	}
 	
-	// 관리자 - 회원 상세정보
 	@RequestMapping("/DetailAdmin")
 	public ModelAndView detailAdmin(@RequestParam String userid) {
 		System.out.println("유저 컨트롤러 - 관리자 기준 상세정보 함수 도착");
