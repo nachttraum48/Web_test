@@ -9,6 +9,8 @@ public interface UserDao {
 	
 	void account(HashMap<String, Object> map);
 	
+	boolean idcheck(String userid);
+	
 	List<UserVo> list();
 	
 	UserVo detail(String userid);

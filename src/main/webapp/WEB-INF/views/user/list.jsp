@@ -29,7 +29,7 @@
 		<td>${m.userid}</td>
 		<td>${m.username}</td>
 		<td>
-		    <form action="/User/Detail" method="POST">
+		    <form action="/User/DetailAdmin" method="POST">
 		    	<input type="hidden" value="${m.userid}" name="userid">
 		    	<input type="submit" value="보기">
 		    </form>

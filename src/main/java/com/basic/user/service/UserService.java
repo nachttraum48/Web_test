@@ -8,6 +8,8 @@ import com.basic.user.vo.UserVo;
 public interface UserService {
 	// 회원가입
 	void account(HashMap<String, Object> map);
+	// id 중복 체크
+	boolean idcheck(String userid);
 	// 회원조회
 	List<UserVo> list();
 	// 회원 상세정보

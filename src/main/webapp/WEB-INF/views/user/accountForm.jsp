@@ -9,12 +9,7 @@
 <script
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-
-	function idCheck() {
-		var useridEl = document.getElementById('userid');
-	    var userid = useridEl.value
-	}
-
+	
 	$(document).submit(function(e){
 	    var useridEl = document.getElementById('userid');
 	    var userid = useridEl.value
@@ -59,8 +54,6 @@
 	        pwConfirmEl.focus();
 	    	return false;
 	    	
-	    } else {
-	       alert('회원가입 되었습니다.');
 	    }
 	 })
    
@@ -70,8 +63,8 @@
 <body>
 	<h2>회원가입</h2>
 	<form action="/User/Account" method="POST">
+		<p style="color:red;">${msg}<p>
 		<span style="margin-right:47px;">ID</span> <input type="text" maxlength="20" name="userid" id="userid">
-		<input type="button" value="중복확인" onclick="idCheck()">
 		<br>
 		<span style="margin-right:31px;">이름</span> <input type="text" maxlength="20" name="username" id="username">
 		<br>

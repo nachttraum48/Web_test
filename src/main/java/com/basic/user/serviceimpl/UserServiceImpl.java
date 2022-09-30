@@ -25,6 +25,14 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
+	public boolean idcheck(String userid) {
+		System.out.println("id 중복 체크 - Service 바티스 전");
+		boolean result = userDao.idcheck(userid);
+		System.out.println("id 중복 체크 - Service 바티스 후");
+		return result;
+	}
+
+	@Override
 	public List<UserVo> list() {
 		System.out.println("회원목록 조회 - Service 바티스 전");
 		List<UserVo> list = userDao.list();

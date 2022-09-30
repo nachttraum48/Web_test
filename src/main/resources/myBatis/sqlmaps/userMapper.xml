@@ -9,6 +9,10 @@
  		INSERT INTO ACCOUNT_USER(USERNAME, USERID, USERPW, USERINDATE)
  		VALUES (#{username}, #{userid}, #{userpw}, SYSDATE)
  	</insert>
+ 	
+ 	<select id="idcheck" resultType="int">
+		SELECT COUNT(*) FROM ACCOUNT_USER WHERE USERID LIKE #{userid} 
+	</select>
 	 	
 	<select id="list" resultType="com.basic.user.vo.UserVo">
 		SELECT * FROM ACCOUNT_USER ORDER BY USERIDX
