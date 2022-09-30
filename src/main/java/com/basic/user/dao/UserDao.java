@@ -11,9 +11,9 @@ public interface UserDao {
 	
 	List<UserVo> list();
 	
-	HashMap<String, Object> detail(HashMap<String, Object> map);
+	UserVo detail(String userid);
 	
-	void delete(HashMap<String, Object> map);
+	void delete(String userid);
 	
 	void update(HashMap<String, Object> map);
 }

@@ -29,7 +29,7 @@ public class UserController {
 
 	@RequestMapping("/Account") // ModelAndView 역할 : MAV 컨트롤 스페이스바 마브, @RequestParam이 해시맵 형식으로 받는 것
 	public ModelAndView userAccount(@RequestParam HashMap<String, Object> map) {
-		System.out.println("UserController Account map = " + map);
+		System.out.println("account map = " + map);
 		ModelAndView mv = new ModelAndView();
 		System.out.println("유저 컨트롤러 - 회원가입 입력 함수 도착");
 		userService.account(map);
@@ -44,66 +44,47 @@ public class UserController {
 		System.out.println("유저 컨트롤러 - 회원목록 조회 함수 도착");
 
 		// DB에서 리스트를 가져온다.
-		List<UserVo> userList = userService.list();
+		List<UserVo> list = userService.list();
 		System.out.println("유저 컨트롤러 - 회원목록 조회 후 리스트에 입력");
 
 		// 가져온 리스트를 화면에 전달한다.
-		mv.addObject("userList", userList);
+		mv.addObject("list", list);
 		mv.setViewName("user/list");
 		System.out.println("유저 컨트롤러 - 회원목록 리스트 화면 전달");
 		return mv;
 	}
 
 	@RequestMapping("/Detail")
-//	public ModelAndView detailUser(String userid) {
-	public ModelAndView detailUser(@RequestParam HashMap<String, Object> map) {
+	public ModelAndView detailUser(@RequestParam String userid) {
 		System.out.println("유저 컨트롤러 - 회원 상세정보 함수 도착");
-		System.out.println("detail map = " + map);
+		System.out.println("detail userid = " + userid);
 		ModelAndView mv = new ModelAndView();
 		
-		// DB에서 map를 가져온다.
-		HashMap<String, Object> detailUser = userService.detail(map);
+		// DB에서 정보를 가져온다.
+		UserVo detail = userService.detail(userid);
 		System.out.println("유저 컨트롤러 - 회원 상세정보 조회 후 map에 입력");
-		System.out.println(detailUser);
+		System.out.println(detail);
 		
-		// 가져온 map를 화면에 전달한다.
-		mv.addObject("detail", detailUser);
+		// 가져온 정보를 화면에 전달한다.
+		mv.addObject("detail", detail);
 		mv.setViewName("user/detail");
 		System.out.println("유저 컨트롤러 - 회원 상세정보 화면 전달");
 		return mv;
 	}
 	
-	// 일반 유저 - 탈퇴하기
-	@RequestMapping("/Delete")
-//	public ModelAndView deleteUser(String userid) { 고치세용ㄹ!!!
-	public ModelAndView deleteUser(@RequestParam HashMap<String, Object> map) {
-		System.out.println("유저 컨트롤러 - 회원탈퇴 함수 도착");
-		System.out.println("일반 유저 탈퇴 map = " + map);
-		ModelAndView mv = new ModelAndView();
-		userService.delete(map);
-		mv.setViewName("redirect:/Login/LoginForm");
-		return mv;
-	}
-	
-	// 관리자 - 유저 추방하기
-	@RequestMapping("/DeleteAdmin")
-//	public ModelAndView deleteAdmin(String userid) { 고치세용ㄹ!!!
-	public ModelAndView deleteAdmin(@RequestParam HashMap<String, Object> map) {
-		System.out.println("유저 컨트롤러 - 회원탈퇴 함수 도착");
-		System.out.println("관리자 회원 추방 map = " + map);
-		ModelAndView mv = new ModelAndView();
-		userService.delete(map);
-		mv.setViewName("redirect:/User/List");
-		return mv;
-	}
-	
-	// 바티스까지 보내도록 개선해야됨
 	@RequestMapping("/UpdateForm")
-	public ModelAndView updateUserForm(@RequestParam HashMap<String, Object> map) {
+	public ModelAndView updateUserForm(@RequestParam String userid) {
 		System.out.println("유저 컨트롤러 - 회원정보 수정 함수 도착");
-		System.out.println("update map = " + map);
+		System.out.println("update userid = " + userid);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("update", map);
+		
+		// DB에서 정보를 가져온다.
+		UserVo updateUser = userService.detail(userid);
+		System.out.println("유저 컨트롤러 - 회원 상세정보 조회 후 map에 입력");
+		System.out.println(updateUser);
+		
+		// 가져온 정보를 화면에 전달한다.
+		mv.addObject("update", updateUser);
 		mv.setViewName("user/updateForm");
 		return mv;
 	}
@@ -114,6 +95,28 @@ public class UserController {
 		System.out.println("유저 컨트롤러 - 회원정보 수정 완료 함수 도착");
 		ModelAndView mv = new ModelAndView();
 		userService.update(map);
+		mv.setViewName("redirect:/User/List");
+		return mv;
+	}
+	
+	// 일반 유저 - 탈퇴하기
+	@RequestMapping("/Delete")
+	public ModelAndView deleteUser(@RequestParam String userid) {
+		System.out.println("유저 컨트롤러 - 회원탈퇴 함수 도착");
+		System.out.println("일반 유저 탈퇴 id = " + userid);
+		ModelAndView mv = new ModelAndView();
+		userService.delete(userid);
+		mv.setViewName("redirect:/Login/LoginForm");
+		return mv;
+	}
+	
+	// 관리자 - 유저 추방하기
+	@RequestMapping("/DeleteAdmin")
+	public ModelAndView deleteAdmin(@RequestParam String userid) {
+		System.out.println("유저 컨트롤러 - 회원탈퇴 함수 도착");
+		System.out.println("관리자 회원 추방 id = " + userid);
+		ModelAndView mv = new ModelAndView();
+		userService.delete(userid);
 		mv.setViewName("redirect:/User/List");
 		return mv;
 	}

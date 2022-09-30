@@ -5,16 +5,16 @@
   
  <mapper namespace="User">
  
- 	<insert id="accountUser">
+ 	<insert id="account">
  		INSERT INTO ACCOUNT_USER(USERNAME, USERID, USERPW, USERINDATE)
  		VALUES (#{username}, #{userid}, #{userpw}, SYSDATE)
  	</insert>
 	 	
-	<select id="userList" resultType="com.basic.user.vo.UserVo">
+	<select id="list" resultType="com.basic.user.vo.UserVo">
 		SELECT * FROM ACCOUNT_USER ORDER BY USERIDX
 	</select>
 	
-	<select id="detailUser" resultType="HashMap">
+	<select id="detail" resultType="com.basic.user.vo.UserVo">
 		SELECT USERIDX,
 		  TO_CHAR(USERNAME) AS USERNAME, USERID,
 		  TO_CHAR(USERPW) AS USERPW,
@@ -23,11 +23,11 @@
 		FROM ACCOUNT_USER WHERE USERID LIKE #{userid}
 	</select>
 	
-	<delete id="deleteUser">
+	<delete id="delete">
 		DELETE FROM ACCOUNT_USER WHERE USERID LIKE #{userid}
 	</delete>
 	
-	<update id="updateUser">
+	<update id="update">
 		UPDATE ACCOUNT_USER SET USERNAME = #{username}, USERPW = #{userpw}, USERUPDATE = SYSDATE WHERE USERID LIKE #{userid}
 	</update>
 	

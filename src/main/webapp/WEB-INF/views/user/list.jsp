@@ -19,15 +19,15 @@
 	<table border="1">
 		<tr>
 		<th>번호</th>
-		<th>이름</th>
 		<th>ID</th>
+		<th>이름</th>
 		<th>상세정보</th>
 		</tr>
-		<c:forEach items="${userList}" var="m">
+		<c:forEach items="${list}" var="m">
 		<tr>
 		<td>${m.useridx}</td>
-		<td>${m.username}</td>
 		<td>${m.userid}</td>
+		<td>${m.username}</td>
 		<td>
 		    <form action="/User/Detail" method="POST">
 		    	<input type="hidden" value="${m.userid}" name="userid">

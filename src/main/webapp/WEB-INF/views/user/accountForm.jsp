@@ -70,10 +70,10 @@
 <body>
 	<h2>회원가입</h2>
 	<form action="/User/Account" method="POST">
-		<span style="margin-right:31px;">이름</span> <input type="text" maxlength="20" name="username" id="username">
-		<br>
 		<span style="margin-right:47px;">ID</span> <input type="text" maxlength="20" name="userid" id="userid">
 		<input type="button" value="중복확인" onclick="idCheck()">
+		<br>
+		<span style="margin-right:31px;">이름</span> <input type="text" maxlength="20" name="username" id="username">
 		<br>
 		<span style="margin-right:38px;">PW</span> <input type="password" maxlength="20" name="userpw" id="userpw">
 		<br>

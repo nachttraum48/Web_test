@@ -27,25 +27,25 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<UserVo> list() {
 		System.out.println("회원목록 조회 - Service 바티스 전");
-		List<UserVo> userlist = userDao.list();
+		List<UserVo> list = userDao.list();
 		System.out.println("회원목록 조회 - Service 바티스 후");
-		System.out.println(userlist);
-		return userlist;
+		System.out.println(list);
+		return list;
 	}
 
 	@Override
-	public HashMap<String, Object> detail(HashMap<String, Object> map) {
+	public UserVo detail(String userid) {
 		System.out.println("회원 상세정보 조회 - Service 바티스 전");
-		HashMap<String, Object> detailUser = userDao.detail(map);
+		UserVo detail = userDao.detail(userid);
 		System.out.println("회원 상세정보 조회 - Service 바티스 후");
-		System.out.println(detailUser);
-		return detailUser;
+		System.out.println(detail);
+		return detail;
 	}
 
 	@Override
-	public void delete(HashMap<String, Object> map) {
+	public void delete(String userid) {
 		System.out.println("회원탈퇴 - Service 바티스 전");
-		userDao.delete(map);
+		userDao.delete(userid);
 		System.out.println("회원탈퇴 - Service 바티스 후");
 	}
 
