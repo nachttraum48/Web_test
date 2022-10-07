@@ -10,6 +10,31 @@
 <script
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+	
+	var userpw = `${detail.userpw}`;
+	var count = 0;
+	var star = "";
+	
+	for (var i = 0; i < userpw.length; i++) {
+		star += "*";
+	}
+	
+	window.onload = function() {
+		var userpwEl = document.getElementById('userpw');
+		userpwEl.innerHTML = star;
+	}
+	
+	function watch() {
+		var userpwEl = document.getElementById('userpw');
+		count += 1;
+		
+		if (count % 2 == 0) {
+			userpwEl.innerHTML = star;
+			
+		} else if (count % 2 == 1) {
+			userpwEl.innerHTML = userpw;
+		}
+	}
 
 	function deleteUser() {
 		if (confirm('탈퇴 하시겠습니까?')) {
@@ -47,7 +72,10 @@
 		</tr>
 		<tr>
 		<td><b>PW</b></td>
-		<td>${detail.userpw}</td>
+		<td>
+			<span style="float:left; margin-right:10px;" id="userpw">초기값</span>
+			<button onclick="watch()">보기</button>
+		</td>
 		</tr>
 		<tr>
 		<td><b>생성일자</b></td>
@@ -82,6 +110,6 @@
 			
 		</c:if>
 	<br>
-	<a href="/">메인화면</a>
+	<a href="/Board/First">메인화면</a>
 </body>
 </html>

@@ -59,7 +59,7 @@ public class LoginController {
 			}
 			
 			mv.addObject("user", loginUser);
-			mv.setViewName("board/boardFirst");
+			mv.setViewName("board/first");
 		
 		// id, pw 잘못 입력했을 때
 		} else if (loginUser == null) {

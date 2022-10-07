@@ -40,14 +40,18 @@
 		 	<input type="hidden" value="<%=userid %>" name="userid">
 		 	<input type="submit" value="마이페이지">
 		 </form>
+		 <br>
+		 <a href="/Board/List">게시판 바로가기</a>
 		 <% } %>
 		 
 		 <% if (adminToken.equals("1")) { %>
 		 <form action="/User/List" method="POST">
 		 	<input type="submit" value="회원목록">
 		 </form>
+		 <br>
+		 <a href="/Board/ListAdmin">게시판 바로가기</a>
 		 <% } %>
-		 
+		
 	<% } %>
 	
 </body>

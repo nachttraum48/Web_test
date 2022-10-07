@@ -38,6 +38,6 @@
 		</c:forEach>
 	</table>
 	<br>
-	<a href="/">메인화면</a>
+	<a href="/Board/First">메인화면</a>
 </body>
 </html>

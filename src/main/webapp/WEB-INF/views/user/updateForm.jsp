@@ -72,6 +72,6 @@
 		<input type="submit" value="수정">
 	</form>
 	<br>
-	<a href="/">메인화면</a>
+	<a href="/Board/First">메인화면</a>
 </body>
 </html>
