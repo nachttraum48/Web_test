@@ -72,7 +72,6 @@
 	<br>
 	<br>
 	<form action="/Board/WriteForm" method="POST">
-		<input type="hidden" value="${m.boardtitle}" name="menuname">
 		<input type="submit" value="글쓰기">
 	</form>
 </body>
