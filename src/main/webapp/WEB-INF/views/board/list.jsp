@@ -11,6 +11,17 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	
+	function search() {
+		var textEl = document.getElementById('text');
+		var text = textEl.value
+		
+		if (text == null || text == '') {
+			alert('검색어를 입력해주세요.');
+			textEl.focus();
+			return false;
+		}
+	}
+	
 </script>
 </head>
 
@@ -59,7 +70,8 @@
 		<td>${m.boardmenu}</td>
 		<td>
 			<form action="/Board/Detail" method="POST">
-				<input type="hidden" value="${m.boardtitle}" name="boardtitle">
+				<input type="hidden" value="${user.userid}" name="userid">
+				<input type="hidden" value="${m.boardidx}" name="boardidx">
 				<input style="border: none; background: transparent;" type="submit" value="${m.boardtitle}">
 			</form>
 		</td>
@@ -71,8 +83,30 @@
 	</table>
 	<br>
 	<br>
+	<!-- 게시글 검색 -->
+	<form action="/Board/Search" method="POST" onsubmit="return search();">
+	  	<input type="hidden" value="${user.userid}" name="userid">
+	  	
+		<select name="searchType" id="searchType">
+	       <option value="title" selected="selected">제목</option>
+	       <option value="content">내용</option>
+	       <option value="writer">작성자</option>
+	  	</select>
+	  	
+	  	<input type="text" name="searchText" id="searchText">
+		<input type="submit" value="검색">
+	</form>
+	<br>
+	<br>
 	<form action="/Board/WriteForm" method="POST">
+		<input type="hidden" value="${user.userid}" name="userid">
 		<input type="submit" value="글쓰기">
+	</form>
+	<br>
+	<br>
+	<form action="/Board/First" method="POST">
+		<input type="hidden" value="${user.userid}" name="userid">
+		<input type="submit" value="메인화면">
 	</form>
 </body>
 </html>

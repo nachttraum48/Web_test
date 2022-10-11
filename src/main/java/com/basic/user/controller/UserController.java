@@ -113,6 +113,7 @@ public class UserController {
 		System.out.println("userid 값 : " + userid);
 		ModelAndView mv = new ModelAndView();
 		
+		// 기존의 유저 정보를 보여주기 위한 유저 정보조회
 		UserVo updateUser = userService.detail(userid);
 		System.out.println(updateUser);
 		
@@ -129,7 +130,7 @@ public class UserController {
 		
 		userService.update(map);
 		
-		// Detail에 매개변수 전달
+		// detail()에 매개변수 userid 전달
 		String userid = (String) map.get("userid");
 		mv.addObject("userid", userid);
 		mv.setViewName("redirect:/User/Detail");

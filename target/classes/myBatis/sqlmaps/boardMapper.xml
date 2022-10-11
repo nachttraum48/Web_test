@@ -23,17 +23,75 @@
 		  TO_CHAR(MENU) AS BOARDMENU,
 		  TO_CHAR(TITLE) AS BOARDTITLE,
 		  TO_CHAR(WRITER) AS BOARDWRITER,
-		  TO_CHAR(INDATE) AS BOARDINDATE, READCOUNT
+		  TO_CHAR(INDATE) AS BOARDINDATE,
+		  TO_CHAR(NVL(READCOUNT, '0')) AS READCOUNT
 		FROM BOARD ORDER BY IDX
  	</select>
  	
- 	<select id="selectList" resultType="com.basic.board.vo.BoardVo">
+ 	<select id="selectMenu" resultType="com.basic.board.vo.BoardVo">
  		SELECT TO_CHAR(IDX) AS BOARDIDX,
 		  TO_CHAR(MENU) AS BOARDMENU,
 		  TO_CHAR(TITLE) AS BOARDTITLE,
 		  TO_CHAR(WRITER) AS BOARDWRITER,
-		  TO_CHAR(INDATE) AS BOARDINDATE, READCOUNT
+		  TO_CHAR(INDATE) AS BOARDINDATE,
+		  TO_CHAR(NVL(READCOUNT, '0')) AS READCOUNT
 		FROM BOARD WHERE MENU LIKE #{menuname} ORDER BY IDX
  	</select>
+ 	
+ 	<select id="search" resultType="com.basic.board.vo.BoardVo">
+ 		SELECT TO_CHAR(IDX) AS BOARDIDX,
+		  TO_CHAR(MENU) AS BOARDMENU,
+		  TO_CHAR(TITLE) AS BOARDTITLE,
+		  TO_CHAR(WRITER) AS BOARDWRITER,
+		  TO_CHAR(INDATE) AS BOARDINDATE,
+		  TO_CHAR(NVL(READCOUNT, '0')) AS READCOUNT
+		FROM BOARD
+	    <where>
+	    	<choose>
+	           <when test="searchType == 'title'">
+	              AND TITLE LIKE '%' || #{searchText} || '%'
+	           </when>
+	           <when test="searchType == 'content'">
+	              AND CONTENT LIKE '%' || #{searchText} || '%'
+	           </when>
+	           <when test="searchType == 'writer'">
+	              AND WRITER LIKE '%' || #{searchText} || '%'
+	           </when>
+	        </choose>
+	    </where>
+ 	</select>
+ 	
+ 	<select id="detail" resultType="com.basic.board.vo.BoardVo">
+ 		SELECT TO_CHAR(IDX) AS BOARDIDX,
+		  TO_CHAR(MENU) AS BOARDMENU,
+		  TO_CHAR(TITLE) AS BOARDTITLE,
+		  TO_CHAR(WRITER) AS BOARDWRITER,
+		  TO_CHAR(CONTENT) AS BOARDCONTENT,
+		  TO_CHAR(INDATE) AS BOARDINDATE,
+		  TO_CHAR(NVL(BOARDUPDATE, '-')) AS BOARDUPDATE,
+		  TO_CHAR(NVL(READCOUNT, '0')) AS READCOUNT
+		FROM BOARD WHERE IDX = #{boardidx}
+ 	</select>
+ 	
+ 	<update id="readCount">
+ 		UPDATE BOARD SET READCOUNT = #{newcount} WHERE IDX = #{boardidx}
+ 	</update>
+ 	
+ 	<update id="update">
+		UPDATE BOARD SET MENU = #{boardmenu},
+		  TITLE = #{boardtitle},
+		  CONTENT = #{boardcontent},
+		  BOARDUPDATE = SYSDATE
+		WHERE IDX = #{boardidx}
+	</update>
+ 	
+ 	<delete id="delete">
+ 		DELETE FROM BOARD WHERE IDX = #{boardidx}
+ 	</delete>
+ 	
+ 	<insert id="write">
+ 		INSERT INTO BOARD(MENU, TITLE, WRITER, CONTENT, INDATE)
+ 		VALUES (#{boardmenu}, #{boardtitle}, #{boardwriter}, #{boardcontent}, SYSDATE)
+ 	</insert>
  	
  </mapper>

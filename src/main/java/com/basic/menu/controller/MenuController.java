@@ -73,7 +73,6 @@ public class MenuController {
 		return mv;
 	}
 	
-	
 	@RequestMapping("/Delete")
 	public ModelAndView delete(@RequestParam String menuname) {
 		System.out.println("메뉴 컨트롤러 - 메뉴삭제 함수 도착");

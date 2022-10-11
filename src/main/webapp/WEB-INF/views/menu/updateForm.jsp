@@ -16,6 +16,7 @@
 
 <body>
 	<h3>게시판 메뉴 수정</h3>
+	
 	<form action="/Menu/Update" method="Post">
 		<span>메뉴 이름</span> <input value="${update.menuname}" placeholder="새로운 이름 입력" maxlength="10" name="newname">
 		<br>

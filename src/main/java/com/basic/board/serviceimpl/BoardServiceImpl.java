@@ -1,5 +1,6 @@
 package com.basic.board.serviceimpl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,41 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVo> selectList(String menuname) {
-		List<BoardVo> selectList = boardDao.selectList(menuname);
+	public List<BoardVo> selectMenu(String menuname) {
+		List<BoardVo> selectList = boardDao.selectMenu(menuname);
 		return selectList;
+	}
+	
+	@Override
+	public List<BoardVo> search(String searchType, String searchText) {
+		List<BoardVo> searchList = boardDao.search(searchType, searchText);
+		return searchList;
+	}
+
+	@Override
+	public BoardVo detail(String boardidx) {
+		BoardVo detail = boardDao.detail(boardidx);
+		return detail;
+	}
+	
+	@Override
+	public void readCount(String newcount, String boardidx) {
+		boardDao.readCount(newcount, boardidx);
+	}
+
+	@Override
+	public void update(HashMap<String, Object> map) {
+		boardDao.update(map);
+	}
+
+	@Override
+	public void delete(String boardidx) {
+		boardDao.delete(boardidx);
+	}
+
+	@Override
+	public void write(HashMap<String, Object> map) {
+		boardDao.write(map);
 	}
 
 }

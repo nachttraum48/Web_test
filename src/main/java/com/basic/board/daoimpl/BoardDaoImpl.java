@@ -1,5 +1,6 @@
 package com.basic.board.daoimpl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -36,9 +37,51 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public List<BoardVo> selectList(String menuname) {
-		List<BoardVo> selectList = sqlSession.selectList("Board.selectList", menuname);
+	public List<BoardVo> selectMenu(String menuname) {
+		List<BoardVo> selectList = sqlSession.selectList("Board.selectMenu", menuname);
 		return selectList;
+	}
+	
+	@Override
+	public List<BoardVo> search(String searchType, String searchText) {
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("searchType", searchType);
+		map.put("searchText", searchText);
+		
+		List<BoardVo> searchList = sqlSession.selectList("Board.search", map);
+		return searchList;
+	}
+
+	@Override
+	public BoardVo detail(String boardidx) {
+		BoardVo detail = sqlSession.selectOne("Board.detail", boardidx);
+		return detail;
+	}
+	
+	@Override
+	public void readCount(String newcount, String boardidx) {
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("newcount", newcount);
+		map.put("boardidx", boardidx);
+		
+		sqlSession.update("Board.readCount", map);
+	}
+
+	@Override
+	public void update(HashMap<String, Object> map) {
+		sqlSession.update("Board.update", map);
+	}
+
+	@Override
+	public void delete(String boardidx) {
+		sqlSession.delete("Board.delete", boardidx);
+	}
+
+	@Override
+	public void write(HashMap<String, Object> map) {
+		sqlSession.insert("Board.write", map);
 	}
 	
 }

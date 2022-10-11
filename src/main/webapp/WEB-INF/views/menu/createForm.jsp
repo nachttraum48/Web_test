@@ -16,6 +16,7 @@
 
 <body>
 	<h3>게시판 메뉴 만들기</h3>
+	
 	<form action="/Menu/Create" id='Form' method="post">
 		<span>메뉴 이름</span> <input type="text" maxlength="10" name="menuname">
 		<br>
