@@ -6,8 +6,28 @@
  <mapper namespace="Menu">
  	
  	<select id="list" resultType="com.basic.menu.vo.MenuVo">
- 		SELECT * FROM MENU ORDER BY IDX
+ 		SELECT TO_CHAR(IDX) AS MENUIDX,
+		  TO_CHAR(NAME) AS MENUNAME,
+		  TO_CHAR(INDATE) AS MENUINDATE,
+		  TO_CHAR(NVL(MENUUPDATE, '-')) AS MENUUPDATE
+		FROM MENU ORDER BY IDX
  	</select>
+ 	
+ 	<select id="info" resultType="com.basic.menu.vo.MenuVo">
+ 		SELECT TO_CHAR(IDX) AS MENUIDX,
+		  TO_CHAR(NAME) AS MENUNAME,
+		  TO_CHAR(INDATE) AS MENUINDATE,
+		  TO_CHAR(NVL(MENUUPDATE, '-')) AS MENUUPDATE
+		FROM MENU WHERE NAME LIKE #{menuname}
+ 	</select>
+ 	
+ 	<insert id="create">
+		INSERT INTO	MENU(NAME, INDATE) VALUES (#{menuname}, SYSDATE)
+	</insert>
+	
+	<update id="update">
+		UPDATE MENU SET NAME = #{newname}, MENUUPDATE = SYSDATE WHERE NAME LIKE #{menuname}
+	</update>
  	
  	<delete id="delete">
  		DELETE FROM MENU WHERE NAME LIKE #{menuname}

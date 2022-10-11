@@ -18,15 +18,11 @@ public class LoginDaoImpl implements LoginDao {
 	@Override
 	public UserVo login(String userid, String userpw) {
 		
-		System.out.println("로그인 Dao 바티스 전");
-		
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("userid", userid);
 		map.put("userpw", userpw);
 		
 		UserVo loginUser = sqlSession.selectOne("Login.loginUser", map);
-		
-		System.out.println("로그인 Dao 바티스 후");
 		return loginUser;
 	}
 	

@@ -25,7 +25,8 @@
 <body>
 	<h2>메뉴 목록</h2>
 	
-	<a href="/Menu/Create">메뉴 생성</a>
+	<a href="/Menu/CreateForm">메뉴 생성</a>
+	<br>
 	<br>
 	<table border="1">
 		<tr>
@@ -39,14 +40,14 @@
 		<tr>
 		<td>${m.menuidx}</td>
 		<td>${m.menuname}</td>
-		<td>${m.menuindate}</td>
-		<td>${m.menuupdate}</td>
+		<td align=center>${m.menuindate}</td>
+		<td align=center>${m.menuupdate}</td>
 		<td>
-			<form style="float:left; margin-right:5px;" action="/Menu/UpdateForm" method="POST">
+			<form style="float:left; margin-left:3px; margin-right:5px;" action="/Menu/UpdateForm" method="POST">
 			   <input type="hidden" value="${m.menuname}" name="menuname">
 			   <input type="submit" value="수정">
 			</form>
-			<form action="/Menu/Delete" method="POST" onsubmit="return deleteMenu();">
+			<form style="float:left; margin-right:3px;" action="/Menu/Delete" method="POST" onsubmit="return deleteMenu();">
 			   <input type="hidden" value="${m.menuname}" name="menuname">
 			   <input type="submit" value="삭제">
 			</form>
@@ -54,7 +55,5 @@
 		</tr>
 		</c:forEach>
 	</table>
-	<br>
-	<a href="/Board/First">메인화면</a>
 </body>
 </html>

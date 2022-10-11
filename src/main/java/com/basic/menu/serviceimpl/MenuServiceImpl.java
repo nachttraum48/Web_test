@@ -17,17 +17,29 @@ public class MenuServiceImpl implements MenuService {
 	
 	@Override
 	public List<MenuVo> list() {
-		System.out.println("메뉴목록 - Service 바티스 전");
 		List<MenuVo> list = menuDao.list();
-		System.out.println("메뉴목록 - Service 바티스 후");
 		return list;
 	}
 	
 	@Override
+	public MenuVo menuInfo(String menuname) {
+		MenuVo menuInfo = menuDao.menuInfo(menuname);
+		return menuInfo;
+	}
+
+	@Override
+	public void create(String menuname) {
+		menuDao.create(menuname);
+	}
+	
+	@Override
+	public void update(String menuname, String newname) {
+		menuDao.update(menuname, newname);
+	}
+	
+	@Override
 	public void delete(String menuname) {
-		System.out.println("메뉴삭제 - Service 바티스 전");
 		menuDao.delete(menuname);
-		System.out.println("메뉴삭제 - Service 바티스 후");
 	}
 	
 }

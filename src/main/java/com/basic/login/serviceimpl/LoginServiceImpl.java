@@ -15,9 +15,7 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public UserVo login(String userid, String userpw) {
-		System.out.println("로그인 Service 바티스 전");
 		UserVo loginUser = loginDao.login(userid, userpw);
-		System.out.println("로그인 Service 바티스 후");
 		return loginUser;
 	}
 

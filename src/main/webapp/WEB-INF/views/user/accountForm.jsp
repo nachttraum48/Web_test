@@ -20,6 +20,7 @@
 	    
 	    var userpwEl = document.getElementById('userpw');
 	    var userpw = userpwEl.value
+	    
 	    var pwConfirmEl = document.getElementById('pwConfirm');
 	    var pwConfirm = pwConfirmEl.value
 		
@@ -76,7 +77,5 @@
 		<!-- name이 키 값이다. name 속성 없으면 값이 안넘어감 -->
 		<input type="submit" value="회원가입">
 	</form>
-	<br>
-	<a href="/">메인화면</a>
 </body>
 </html>

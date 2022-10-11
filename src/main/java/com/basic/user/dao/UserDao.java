@@ -6,16 +6,23 @@ import java.util.List;
 import com.basic.user.vo.UserVo;
 
 public interface UserDao {
-	
+
+	// 회원가입
 	void account(HashMap<String, Object> map);
-	
+
+	// id 중복 체크
 	boolean idcheck(String userid);
-	
+
+	// 회원조회
 	List<UserVo> list();
-	
+
+	// 회원 상세정보
 	UserVo detail(String userid);
-	
+
+	// 회원탈퇴
 	void delete(String userid);
-	
+
+	// 회원수정
 	void update(HashMap<String, Object> map);
+	
 }

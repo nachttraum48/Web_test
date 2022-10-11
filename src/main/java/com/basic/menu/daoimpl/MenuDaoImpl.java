@@ -1,5 +1,6 @@
 package com.basic.menu.daoimpl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,17 +18,34 @@ public class MenuDaoImpl implements MenuDao {
 
 	@Override
 	public List<MenuVo> list() {
-		System.out.println("메뉴목록 - Dao 바티스 전");
 		List<MenuVo> list = sqlSession.selectList("Menu.list");
-		System.out.println("메뉴목록 - Dao 바티스 후");
 		return list;
+	}
+	
+	@Override
+	public MenuVo menuInfo(String menuname) {
+		MenuVo menuInfo = sqlSession.selectOne("Menu.info", menuname);
+		return menuInfo;
+	}
+
+	@Override
+	public void create(String menuname) {
+		sqlSession.insert("Menu.create", menuname);
+	}
+	
+	@Override
+	public void update(String menuname, String newname) {
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("menuname", menuname);
+		map.put("newname", newname);
+		
+		sqlSession.update("Menu.update", map);
 	}
 
 	@Override
 	public void delete(String menuname) {
-		System.out.println("메뉴삭제 - Dao 바티스 전");
 		sqlSession.delete("Menu.delete", menuname);
-		System.out.println("메뉴삭제 - Dao 바티스 후");
 	}
 	
 }

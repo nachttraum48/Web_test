@@ -5,8 +5,35 @@
   
  <mapper namespace="Board">
  	
- 	<select id="list" resultType="com.basic.user.vo.BoardVo">
- 		SELECT * FROM BOARD ORDER BY IDX
+ 	<select id="userInfo" resultType="com.basic.user.vo.UserVo">
+ 		SELECT USERIDX,
+		  TO_CHAR(USERNAME) AS USERNAME, USERID,
+		  TO_CHAR(USERPW) AS USERPW,
+		  TO_CHAR(USERINDATE) AS USERINDATE,
+		  TO_CHAR(NVL(USERUPDATE, '-')) AS USERUPDATE
+		FROM ACCOUNT_USER WHERE USERID LIKE #{userid}
+ 	</select>
+ 	
+ 	<select id="menuList" resultType="com.basic.menu.vo.MenuVo">
+ 		SELECT TO_CHAR(NAME) AS MENUNAME FROM MENU ORDER BY IDX
+ 	</select>
+ 	
+ 	<select id="boardList" resultType="com.basic.board.vo.BoardVo">
+ 		SELECT TO_CHAR(IDX) AS BOARDIDX,
+		  TO_CHAR(MENU) AS BOARDMENU,
+		  TO_CHAR(TITLE) AS BOARDTITLE,
+		  TO_CHAR(WRITER) AS BOARDWRITER,
+		  TO_CHAR(INDATE) AS BOARDINDATE, READCOUNT
+		FROM BOARD ORDER BY IDX
+ 	</select>
+ 	
+ 	<select id="selectList" resultType="com.basic.board.vo.BoardVo">
+ 		SELECT TO_CHAR(IDX) AS BOARDIDX,
+		  TO_CHAR(MENU) AS BOARDMENU,
+		  TO_CHAR(TITLE) AS BOARDTITLE,
+		  TO_CHAR(WRITER) AS BOARDWRITER,
+		  TO_CHAR(INDATE) AS BOARDINDATE, READCOUNT
+		FROM BOARD WHERE MENU LIKE #{menuname} ORDER BY IDX
  	</select>
  	
  </mapper>

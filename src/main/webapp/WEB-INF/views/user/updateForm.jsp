@@ -71,7 +71,5 @@
 		<!-- name이 키 값이다. name 속성 없으면 값이 안넘어감 -->
 		<input type="submit" value="수정">
 	</form>
-	<br>
-	<a href="/Board/First">메인화면</a>
 </body>
 </html>

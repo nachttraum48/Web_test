@@ -25,7 +25,7 @@ public class LoginController {
 	
 	@RequestMapping("Login")
 	public ModelAndView login(String userid, String userpw) {   // 파라미터
-		System.out.println("login = userid : " + userid + ", userpw : " + userpw);
+		System.out.println("로그인 id : " + userid + ", pw : " + userpw);
 		ModelAndView mv = new ModelAndView();
 		
 		UserVo loginUser = loginService.login(userid, userpw);   // 아규먼트
@@ -44,18 +44,6 @@ public class LoginController {
 			} else if (!loginUser.getUserid().equals("admin")) {
 				loginUser.setAdminToken("0");
 				System.out.println("로그인한 계정은 일반 유저입니다.");
-			}
-			
-			// 토큰 값 테스트로 문구 출력
-			String adminTest = "";
-			if (loginUser.getAdminToken().equals("1")) {
-				adminTest = "관리자";
-				System.out.println("로그인 계정 정보 - userid = " + loginUser.getUserid() + ", userpw = " + loginUser.getUserpw());
-				System.out.println("권한 : " + adminTest + "입니다.");
-			} else {
-				adminTest = "일반 유저";
-				System.out.println("로그인 계정 정보 - userid = " + loginUser.getUserid() + ", userpw = " + loginUser.getUserpw());
-				System.out.println("권한 : " + adminTest + "입니다.");
 			}
 			
 			mv.addObject("user", loginUser);
