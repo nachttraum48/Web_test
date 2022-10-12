@@ -149,7 +149,8 @@ public class BoardController {
 
 		// 게시글 정보 확인
 		BoardVo detail = boardService.detail(boardidx);
-
+		System.out.println(detail);
+		
 		// 조회수 체크
 		String countInfo = detail.getReadcount();
 		int readcount = Integer.parseInt(countInfo);
@@ -241,7 +242,7 @@ public class BoardController {
 	public ModelAndView write(@RequestParam HashMap<String, Object> map) {
 		System.out.println("보드 컨트롤러 - 게시글 작성 완료 함수 도착");
 		ModelAndView mv = new ModelAndView();
-
+		System.out.println(map);
 		boardService.write(map);
 
 		// list()에 매개변수 userid 전달
