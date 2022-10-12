@@ -11,17 +11,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	
-	function search() {
-		var textEl = document.getElementById('text');
-		var text = textEl.value
-		
-		if (text == null || text == '') {
-			alert('검색어를 입력해주세요.');
-			textEl.focus();
-			return false;
-		}
-	}
-	
 </script>
 </head>
 
@@ -55,11 +44,11 @@
 	</table>
 	<br>
 	<!-- 게시글 테이블 -->
-	<table border="1">
+	<table border="1" >
 		<tr>
 		<th>번호</th>
 		<th>카테고리</th>
-		<th>제목</th>
+		<th width="300">제목</th>
 		<th>작성자</th>
 		<th>작성일자</th>
 		<th>수정일자</th>
@@ -86,7 +75,7 @@
 	<br>
 	<br>
 	<!-- 게시글 검색 -->
-	<form action="/Board/Search" method="POST" onsubmit="return search();">
+	<form action="/Board/Search" method="POST">
 	  	<input type="hidden" value="${user.userid}" name="userid">
 	  	
 		<select name="searchType" id="searchType">
