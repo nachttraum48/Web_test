@@ -149,7 +149,6 @@ public class BoardController {
 
 		// 게시글 정보 확인
 		BoardVo detail = boardService.detail(boardidx);
-		System.out.println(detail);
 
 		// 조회수 체크
 		String countInfo = detail.getReadcount();
@@ -183,7 +182,7 @@ public class BoardController {
 		// 기존의 보드 정보를 보여주기 위한 보드 정보조회
 		BoardVo updateBoard = boardService.detail(boardidx);
 		mv.addObject("update", updateBoard);
-		mv.setViewName("menu/updateForm");
+		mv.setViewName("board/updateForm");
 
 		return mv;
 	}

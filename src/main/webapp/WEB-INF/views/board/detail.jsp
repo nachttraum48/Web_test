@@ -50,6 +50,11 @@
 		   <input type="submit" value="삭제">
 		</form>
 	</c:if>
-	
+	<br>
+	<br>
+	<form action="/Board/List" method="POST">
+		<input type="hidden" value="${user.userid}" name="userid">
+		<input type="submit" value="목록으로">
+	</form>
 </body>
 </html>

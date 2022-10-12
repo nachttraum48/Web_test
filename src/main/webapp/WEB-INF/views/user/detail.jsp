@@ -99,6 +99,12 @@
 			   <input type="submit" value="탈퇴">
 			</form>
 		</c:if>
+		<br>
+		<br>
+		<form action="/Board/First" method="POST">
+			<input type="hidden" value="${detail.userid}" name="userid">
+			<input type="submit" value="메인화면">
+		</form>
 		
 		<!-- 뒤에 조건은 관리자를 삭제 못하게 설정한 것 -->
 		<c:if test="${detail.adminToken eq '1' && detail.userid ne 'admin'}">

@@ -62,6 +62,7 @@
 		<th>제목</th>
 		<th>작성자</th>
 		<th>작성일자</th>
+		<th>수정일자</th>
 		<th>조회 수</th>
 		</tr>
 		<c:forEach items="${board}" var="m">
@@ -76,7 +77,8 @@
 			</form>
 		</td>
 		<td>${m.boardwriter}</td>
-		<td>${m.boardindate}</td>
+		<td align=center>${m.boardindate}</td>
+		<td align=center>${m.boardupdate}</td>
 		<td>${m.readcount}</td>
 		</tr>
 		</c:forEach>
