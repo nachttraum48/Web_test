@@ -16,10 +16,7 @@ public interface BoardService {
 	List<MenuVo> menuList();
 	
 	// 게시글 조회
-	List<BoardVo> boardList();
-	
-	// 메뉴별 게시글 조회
-	List<BoardVo> selectMenu(String menuname);
+	List<BoardVo> boardList(String menuname);
 	
 	// 검색한 게시글 조회
 	List<BoardVo> search(String searchType, String searchText);

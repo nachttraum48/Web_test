@@ -31,15 +31,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public List<BoardVo> boardList() {
-		List<BoardVo> boardList = boardDao.boardList();
+	public List<BoardVo> boardList(String menuname) {
+		List<BoardVo> boardList = boardDao.boardList(menuname);
 		return boardList;
-	}
-
-	@Override
-	public List<BoardVo> selectMenu(String menuname) {
-		List<BoardVo> selectList = boardDao.selectMenu(menuname);
-		return selectList;
 	}
 	
 	@Override

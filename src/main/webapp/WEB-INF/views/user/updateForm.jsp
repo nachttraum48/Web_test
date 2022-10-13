@@ -18,7 +18,6 @@
          var pwConfirmEl = document.getElementById('pwConfirm');
  	     var pwConfirm = pwConfirmEl.value
          
-         
          if (confirm('수정하시겠습니까?')) {
         	 
 	         if ( username == null || username == '' ){

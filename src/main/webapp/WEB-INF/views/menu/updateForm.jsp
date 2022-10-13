@@ -11,14 +11,22 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	
+	function update() {
+		if (confirm('수정 하시겠습니까?')) {
+			alert('수정 되었습니다.');
+		} else {
+			return false;
+		}
+	}
+	
 </script>
 </head>
 
 <body>
 	<h3>게시판 메뉴 수정</h3>
 	
-	<form action="/Menu/Update" method="Post">
-		<span>메뉴 이름</span> <input value="${update.menuname}" placeholder="새로운 이름 입력" maxlength="10" name="newname">
+	<form action="/Menu/Update" method="Post" onsubmit="return update();">
+		<span>메뉴 이름</span> <input value="${update.menuname}" placeholder="새로운 이름 입력" maxlength="10" name="newname" required>
 		<br>
 		<br>
 		<input type="hidden" value="${update.menuname}" name="menuname">

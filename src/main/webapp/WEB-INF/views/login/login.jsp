@@ -11,23 +11,23 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	
-	$(document).submit(function(e) {
-		var useridEl = document.getElementById('userid');
-		var userid = useridEl.value
-		var userpwEl = document.getElementById('userpw');
-		var userpw = userpwEl.value
+	$(document).submit(function(e){
+	    var useridEl = document.getElementById('userid');
+	    var userid = useridEl.value
+	    var userpwEl = document.getElementById('userpw');
+	    var userpw = userpwEl.value
 		
-	    if ( userid == null || userid == '' ) {
-	    	alert("아이디를 입력해주세요.");
-	    	useridEl.focus();
+	    if ( userid == null || userid == '' ){
+	        alert('아이디를 입력해주세요.');
+	        useridEl.focus();
 	        return false;
 	    }
-	    if ( userpw == null || userpw == '' ) {
-	    	alert("비밀번호를 입력해주세요.");
-	    	userpwEl.focus();
+	    if ( userpw == null || userpw == '' ){
+	        alert('비밀번호를 입력해주세요.');
+	        userpwEl.focus();
 	        return false;
 	    }
-	})
+	 })
 	
 </script>
 </head>

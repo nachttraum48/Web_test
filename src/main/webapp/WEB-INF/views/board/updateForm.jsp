@@ -11,14 +11,22 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	
+	function update() {
+		if (confirm('수정 하시겠습니까?')) {
+			alert('수정 되었습니다.');
+		} else {
+			return false;
+		}
+	}
+	
 </script>
 </head>
 
 <body>
 	<h2>게시글 수정</h2>
 	
-	<form action="/Board/Update" method="Post">
-		<span style="margin-right:31px;">제목</span> <input value="${update.boardtitle}" placeholder="새로운 제목 입력" maxlength="20" name="boardtitle"> <br>
+	<form action="/Board/Update" method="Post" onsubmit="return update();">
+		<span style="margin-right:31px;">제목</span> <input value="${update.boardtitle}" placeholder="새로운 제목 입력" maxlength="20" name="boardtitle" required> <br>
 		<span style="margin-right:15px;">작성자</span> <input value="${user.userid}" readonly="readonly">
 		<br>
 		<span>카테고리</span>

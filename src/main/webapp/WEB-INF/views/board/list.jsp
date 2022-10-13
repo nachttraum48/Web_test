@@ -33,7 +33,7 @@
 		</th>
 		<c:forEach items="${menu}" var="m">
 			<th>
-			<form action="/Board/SelectList" method="POST">
+			<form action="/Board/List" method="POST">
 				<input type="hidden" value="${user.userid}" name="userid">
 				<input type="hidden" value="${m.menuname}" name="menuname">
 				<input style="border: none; background: transparent;" type="submit" value="${m.menuname}">
@@ -55,22 +55,26 @@
 		<th>조회 수</th>
 		</tr>
 		<c:forEach items="${board}" var="m">
-		<tr>
-		<td>${m.boardidx}</td>
-		<td>${m.boardmenu}</td>
-		<td>
-			<form action="/Board/Detail" method="POST">
-				<input type="hidden" value="${user.userid}" name="userid">
-				<input type="hidden" value="${m.boardidx}" name="boardidx">
-				<input style="border: none; background: transparent;" type="submit" value="${m.boardtitle}">
-			</form>
-		</td>
-		<td>${m.boardwriter}</td>
-		<td align=center>${m.boardindate}</td>
-		<td align=center>${m.boardupdate}</td>
-		<td>${m.readcount}</td>
-		</tr>
+			<tr>
+			<td>${m.boardidx}</td>
+			<td>${m.boardmenu}</td>
+			<td>
+				<form action="/Board/Detail" method="POST">
+					<input type="hidden" value="${user.userid}" name="userid">
+					<input type="hidden" value="${m.boardidx}" name="boardidx">
+					<input style="border: none; background: transparent;" type="submit" value="${m.boardtitle}">
+				</form>
+			</td>
+			<td>${m.boardwriter}</td>
+			<td align=center>${m.boardindate}</td>
+			<td align=center>${m.boardupdate}</td>
+			<td>${m.readcount}</td>
+			</tr>
 		</c:forEach>
+		
+		<c:if test="${board eq null}">
+			<tr><td style="background:lightgray;" height="80" colspan="7" align=center><b>게시글이 존재하지 않습니다.</b></td></tr>
+		</c:if>
 	</table>
 	<br>
 	<br>
@@ -78,13 +82,13 @@
 	<form action="/Board/Search" method="POST">
 	  	<input type="hidden" value="${user.userid}" name="userid">
 	  	
-		<select name="searchType" id="searchType">
-	       <option value="title" selected="selected">제목</option>
+		<select name="searchType">
+	       <option value="title" selected>제목</option>
 	       <option value="content">내용</option>
 	       <option value="writer">작성자</option>
 	  	</select>
 	  	
-	  	<input type="text" name="searchText" id="searchText">
+	  	<input type="text" name="searchText">
 		<input type="submit" value="검색">
 	</form>
 	<br>

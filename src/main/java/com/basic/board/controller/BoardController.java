@@ -44,8 +44,8 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/List")
-	public ModelAndView list(@RequestParam String userid) {
-		System.out.println("보드 컨트롤러 - 전체 게시글 조회 함수 도착");
+	public ModelAndView list(@RequestParam String userid, String menuname) {
+		System.out.println("보드 컨트롤러 - 게시글 조회 함수 도착");
 		ModelAndView mv = new ModelAndView();
 
 		// 로그인 유저 확인
@@ -67,39 +67,15 @@ public class BoardController {
 		mv.addObject("menu", menuList);
 
 		// 게시글 조회하기
-		List<BoardVo> boardList = boardService.boardList();
-		mv.addObject("board", boardList);
-
-		mv.setViewName("board/list");
-		return mv;
-	}
-
-	@RequestMapping("/SelectList")
-	public ModelAndView selectList(@RequestParam String userid, String menuname) {
-		System.out.println("보드 컨트롤러 - 메뉴별 게시글 조회 함수 도착");
-		ModelAndView mv = new ModelAndView();
-
-		// 로그인 유저 확인
-		UserVo loginUser = boardService.userInfo(userid);
-
-		// 관리자 예외처리
-		if (loginUser.getUserid().equals("admin")) {
-			loginUser.setAdminToken("1");
-			System.out.println("로그인한 계정은 관리자입니다.");
-		} else if (!loginUser.getUserid().equals("admin")) {
-			loginUser.setAdminToken("0");
-			System.out.println("로그인한 계정은 일반 유저입니다.");
+		List<BoardVo> boardList = boardService.boardList(menuname);
+		
+		// 게시글이 존재하지 않을 때 예외처리
+		if (boardList.isEmpty()) {
+			System.out.println("게시글이 존재하지 않습니다.");
+			mv.addObject("board", null);
+		} else {
+			mv.addObject("board", boardList);
 		}
-
-		mv.addObject("user", loginUser);
-
-		// 메뉴 조회하기
-		List<MenuVo> menuList = boardService.menuList();
-		mv.addObject("menu", menuList);
-
-		// 메뉴별 게시글 조회하기
-		List<BoardVo> selectList = boardService.selectMenu(menuname);
-		mv.addObject("board", selectList);
 
 		mv.setViewName("board/list");
 		return mv;
@@ -132,6 +108,14 @@ public class BoardController {
 		// 검색한 게시글 조회하기
 		List<BoardVo> searchList = boardService.search(searchType, searchText);
 		mv.addObject("board", searchList);
+		
+		// 게시글이 존재하지 않을 때 예외처리
+		if (searchList.isEmpty()) {
+			System.out.println("게시글이 존재하지 않습니다.");
+			mv.addObject("board", null);
+		} else {
+			mv.addObject("board", searchList);
+		}
 
 		mv.setViewName("board/list");
 		return mv;
@@ -149,7 +133,6 @@ public class BoardController {
 
 		// 게시글 정보 확인
 		BoardVo detail = boardService.detail(boardidx);
-		System.out.println(detail);
 		
 		// 조회수 체크
 		String countInfo = detail.getReadcount();
@@ -192,7 +175,6 @@ public class BoardController {
 	public ModelAndView update(@RequestParam HashMap<String, Object> map) {
 		System.out.println("보드 컨트롤러 - 게시글 수정 입력 함수 도착");
 		ModelAndView mv = new ModelAndView();
-
 		boardService.update(map);
 
 		// detail()에 매개변수 userid 전달
@@ -242,7 +224,6 @@ public class BoardController {
 	public ModelAndView write(@RequestParam HashMap<String, Object> map) {
 		System.out.println("보드 컨트롤러 - 게시글 작성 완료 함수 도착");
 		ModelAndView mv = new ModelAndView();
-		System.out.println(map);
 		boardService.write(map);
 
 		// list()에 매개변수 userid 전달

@@ -31,7 +31,7 @@
 		작성자 &nbsp;&nbsp;&nbsp;: ${detail.boardwriter}<br>
 		카테고리 : ${detail.boardmenu}<br>
 		조회 수 &nbsp;&nbsp;: ${detail.readcount}<br>
-		작성일자 : ${detail.boardindate}, 수정일자 : ${detail.boardupdate}
+		작성일자 : ${detail.boardindate} , 수정일자 : ${detail.boardupdate}
 	</p>
 	
 	<textarea cols="100" rows="30" readonly="readonly">${detail.boardcontent}</textarea>

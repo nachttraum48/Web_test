@@ -11,14 +11,18 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	
+	function create() {
+		alert('메뉴가 생성 되었습니다.');
+	}
+	
 </script>
 </head>
 
 <body>
 	<h3>게시판 메뉴 만들기</h3>
 	
-	<form action="/Menu/Create" id='Form' method="post">
-		<span>메뉴 이름</span> <input type="text" maxlength="10" name="menuname">
+	<form action="/Menu/Create" id='Form' method="post" onsubmit="return create();">
+		<span>메뉴 이름</span> <input type="text" maxlength="10" name="menuname" required>
 		<br>
 		<br>
 		<input type="submit" value="메뉴 만들기">
