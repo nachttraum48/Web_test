@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.basic.board.vo.BoardVo;
 import com.basic.menu.vo.MenuVo;
+import com.basic.reply.vo.ReplyVo;
 import com.basic.user.vo.UserVo;
 
 public interface BoardService {
@@ -23,6 +24,9 @@ public interface BoardService {
 	
 	// 게시글 상세 페이지
 	BoardVo detail(String boardidx);
+	
+	// 댓글 조회
+	List<ReplyVo> reply(String boardidx);
 	
 	// 조회수 체크 후 DB 수정
 	void readCount(String newcount, String boardidx);

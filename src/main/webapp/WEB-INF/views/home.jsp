@@ -16,5 +16,11 @@
 <body>
 	<h2>home</h2>
 	<a href="/Login/LoginForm">로그인</a>
+	<br>
+	<br>
+	<form action="/Board/List" method="POST">
+		<input type="hidden" value="" name="userid">
+		<input type="submit" value="게시판 바로가기">
+	</form>
 </body>
 </html>

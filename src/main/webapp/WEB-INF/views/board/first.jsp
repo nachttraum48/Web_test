@@ -44,7 +44,7 @@
 		 
 		 <% if (adminToken.equals("1")) { %>
 		 <form action="/User/List" method="POST">
-		 	<input type="submit" value="회원목록">
+		 	<input type="submit" value="회원관리">
 		 </form>
 		 <% } %>
 		 

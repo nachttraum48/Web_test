@@ -10,6 +10,7 @@ import com.basic.board.dao.BoardDao;
 import com.basic.board.service.BoardService;
 import com.basic.board.vo.BoardVo;
 import com.basic.menu.vo.MenuVo;
+import com.basic.reply.vo.ReplyVo;
 import com.basic.user.vo.UserVo;
 
 @Service("boardService")
@@ -46,6 +47,12 @@ public class BoardServiceImpl implements BoardService {
 	public BoardVo detail(String boardidx) {
 		BoardVo detail = boardDao.detail(boardidx);
 		return detail;
+	}
+	
+	@Override
+	public List<ReplyVo> reply(String boardidx) {
+		List<ReplyVo> reply = boardDao.reply(boardidx);
+		return reply;
 	}
 	
 	@Override

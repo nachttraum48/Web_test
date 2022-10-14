@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.basic.board.dao.BoardDao;
 import com.basic.board.vo.BoardVo;
 import com.basic.menu.vo.MenuVo;
+import com.basic.reply.vo.ReplyVo;
 import com.basic.user.vo.UserVo;
 
 @Repository("boardDao")
@@ -20,19 +21,19 @@ public class BoardDaoImpl implements BoardDao {
 	
 	@Override
 	public UserVo userInfo(String userid) {
-		UserVo loginUser = sqlSession.selectOne("Board.userInfo", userid);
+		UserVo loginUser = sqlSession.selectOne("User.detail", userid);
 		return loginUser;
 	}
 
 	@Override
 	public List<MenuVo> menuList() {
-		List<MenuVo> menuList = sqlSession.selectList("Board.menuList");
+		List<MenuVo> menuList = sqlSession.selectList("Menu.list");
 		return menuList;
 	}
 	
 	@Override
 	public List<BoardVo> boardList(String menuname) {
-		List<BoardVo> boardList = sqlSession.selectList("Board.boardList", menuname);
+		List<BoardVo> boardList = sqlSession.selectList("Board.list", menuname);
 		return boardList;
 	}
 	
@@ -51,6 +52,12 @@ public class BoardDaoImpl implements BoardDao {
 	public BoardVo detail(String boardidx) {
 		BoardVo detail = sqlSession.selectOne("Board.detail", boardidx);
 		return detail;
+	}
+
+	@Override
+	public List<ReplyVo> reply(String boardidx) {
+		List<ReplyVo> reply = sqlSession.selectList("Reply.list", boardidx);
+		return reply;
 	}
 	
 	@Override

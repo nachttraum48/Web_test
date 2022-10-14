@@ -11,7 +11,13 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	
-	function write() {
+	function logout() {
+		if (!confirm('로그아웃 하시겠습니까?')) {
+			return false;
+		}
+	}
+	
+	function writeBoard() {
 		alert('작성 되었습니다.');
 	}
 	
@@ -19,9 +25,33 @@
 </head>
 
 <body>
-	<h2>게시글 작성</h2>
+	<h2 style="float:left; margin-right:309px;">게시글 작성</h2>
 	
-	<form action="/Board/Write" method="Post" onsubmit="return write();">
+	<!-- 로그인 유저 정보 -->
+	<span style="float:left; margin-top:25px; margin-right:10px;"><strong>${user.username}</strong>님</span>
+	
+	<form style="float:left; margin-top:25px; margin-right:10px;" action="/Login/Logout" method="POST" onsubmit="return logout();">
+	 	<input type="submit" value="로그아웃">
+	</form>	
+	
+	<c:if test="${user.adminToken ne null}">
+		
+		<c:if test="${user.adminToken eq '0'}">
+			<form style="float:left; margin-top:25px;" action="/User/Detail" method="POST">
+				<input type="hidden" value="${user.userid}" name="userid">
+				<input type="submit" value="마이페이지">
+			</form>
+		</c:if>
+	
+		<c:if test="${user.adminToken eq '1'}">
+			<form style="float:left; margin-top:25px;" action="/User/List" method="POST">
+				<input type="submit" value="회원관리">
+			</form>
+		</c:if>
+		
+	</c:if><br><br><br><br>
+	
+	<form action="/Board/Write" method="Post" onsubmit="return writeBoard();">
 		<span style="margin-right:31px;">제목</span> <input type="text" maxlength="20" name="boardtitle" required> <br>
 		<span style="margin-right:15px;">작성자</span> <input type="text" value="${user.userid}" name="boardwriter" readonly="readonly">
 		<br>
@@ -33,6 +63,7 @@
 		    <c:forEach items="${menu}" var="m">
 		    	<option value="${m.menuname}">${m.menuname}</option>
 		    </c:forEach>
+		    
 		</select>
 		<br>
 		<br>

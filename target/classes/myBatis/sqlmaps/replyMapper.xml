@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="Reply">
+ 	
+ 	<insert id="write">
+ 		INSERT INTO REPLY(BOARDIDX, WRITER, CONTENT, INDATE)
+ 		VALUES (#{boardidx}, #{userid}, #{replycontent}, SYSDATE)
+ 	</insert>
+ 	
+ 	<select id="list" resultType="com.basic.reply.vo.ReplyVo">
+ 		SELECT TO_CHAR(REPLYIDX) AS REPLYIDX,
+		  TO_CHAR(WRITER) AS REPLYWRITER,
+		  CONTENT AS REPLYCONTENT,
+		  TO_CHAR(INDATE) AS REPLYINDATE,
+		  TO_CHAR(NVL(REPLYUPDATE, '-')) AS REPLYUPDATE
+		FROM REPLY WHERE BOARDIDX = #{boardidx} ORDER BY REPLYIDX
+ 	</select>
+ 	
+ 	<select id="detail" resultType="com.basic.reply.vo.ReplyVo">
+ 		SELECT TO_CHAR(REPLYIDX) AS REPLYIDX,
+ 		  TO_CHAR(BOARDIDX) AS BOARDIDX,
+		  TO_CHAR(WRITER) AS REPLYWRITER,
+		  CONTENT AS REPLYCONTENT,
+		  TO_CHAR(INDATE) AS REPLYINDATE,
+		  TO_CHAR(NVL(REPLYUPDATE, '-')) AS REPLYUPDATE
+		FROM REPLY WHERE REPLYIDX = #{replyidx}
+ 	</select>
+ 	
+ 	<update id="update">
+		UPDATE REPLY SET CONTENT = #{replycontent},
+		  REPLYUPDATE = SYSDATE
+		WHERE REPLYIDX = #{replyidx}
+	</update>
+ 	
+ 	<delete id="delete">
+ 		DELETE FROM REPLY WHERE REPLYIDX = #{replyidx}
+ 	</delete>
+ 	
+ </mapper>

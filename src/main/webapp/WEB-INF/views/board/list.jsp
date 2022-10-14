@@ -11,16 +11,68 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	
+	var userid = `${user.userid}`;
+	
+	function writeBoard() {
+		if (userid == null || userid == '') {
+			alert('로그인이 필요한 서비스입니다.');
+			return false;
+		}
+	}
+	
+	function logout() {
+		if (!confirm('로그아웃 하시겠습니까?')) {
+			return false;
+		}
+	}
+	
 </script>
 </head>
 
 <body>
-	<h2>게시판</h2>
+	<!-- 비 로그인 상태일 시 출력 -->
+	<c:if test="${user.userid eq null}">
+		
+		<h2 style="float:left; margin-right:545px;">게시판</h2>
+		
+		<form style="float:left; margin-top:25px;" action="/Login/LoginForm" method="POST">
+		 	<input type="submit" value="로그인">
+		</form>
+		
+	</c:if>
+	
+	<!-- 로그인 상태일 시 출력 -->
+	<c:if test="${user.userid ne null}">
+		<h2 style="float:left; margin-right:365px;">게시판</h2>
+		
+		<!-- 로그인 유저 정보 -->
+		<span style="float:left; margin-top:25px; margin-right:10px;"><strong>${user.username}</strong>님</span>
+		
+		<form style="float:left; margin-top:25px; margin-right:10px;" action="/Login/Logout" method="POST" onsubmit="return logout();">
+		 	<input type="submit" value="로그아웃">
+		</form>
+		
+		<c:if test="${user.adminToken ne null}">
+			
+			<c:if test="${user.adminToken eq '0'}">
+				<form style="float:left; margin-top:25px;" action="/User/Detail" method="POST">
+					<input type="hidden" value="${user.userid}" name="userid">
+					<input type="submit" value="마이페이지">
+				</form>
+			</c:if>
+			<c:if test="${user.adminToken eq '1'}">
+				<form style="float:left; margin-top:25px;" action="/User/List" method="POST">
+					<input type="submit" value="회원관리">
+				</form>
+			</c:if>
+			
+		</c:if>
+	</c:if><br><br><br><br>
 	
 	<c:if test="${user.adminToken ne null && user.adminToken eq '1'}">
 		<a href="/Menu/List">메뉴 편집</a>
-	<br>
-	<br>
+		<br>
+		<br>
 	</c:if>
 	<!-- 메뉴 테이블 -->
 	<table border="1">
@@ -77,7 +129,6 @@
 		</c:if>
 	</table>
 	<br>
-	<br>
 	<!-- 게시글 검색 -->
 	<form action="/Board/Search" method="POST">
 	  	<input type="hidden" value="${user.userid}" name="userid">
@@ -92,16 +143,22 @@
 		<input type="submit" value="검색">
 	</form>
 	<br>
-	<br>
-	<form action="/Board/WriteForm" method="POST">
+	<form action="/Board/WriteForm" method="POST" onsubmit="return writeBoard();">
 		<input type="hidden" value="${user.userid}" name="userid">
 		<input type="submit" value="글쓰기">
 	</form>
 	<br>
-	<br>
-	<form action="/Board/First" method="POST">
-		<input type="hidden" value="${user.userid}" name="userid">
-		<input type="submit" value="메인화면">
-	</form>
+	<!-- 비 로그인 시 메인화면 다르게 출력 -->
+	<c:if test="${user.userid eq null}">
+		<form action="/" method="POST">
+			<input type="submit" value="메인화면">
+		</form>
+	</c:if>
+	<c:if test="${user.userid ne null}">
+		<form action="/Board/First" method="POST">
+			<input type="hidden" value="${user.userid}" name="userid">
+			<input type="submit" value="메인화면">
+		</form>
+	</c:if>
 </body>
 </html>

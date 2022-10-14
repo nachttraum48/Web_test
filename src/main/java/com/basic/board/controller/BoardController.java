@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.basic.board.service.BoardService;
 import com.basic.board.vo.BoardVo;
 import com.basic.menu.vo.MenuVo;
+import com.basic.reply.vo.ReplyVo;
 import com.basic.user.vo.UserVo;
 
 @Controller
@@ -47,21 +48,28 @@ public class BoardController {
 	public ModelAndView list(@RequestParam String userid, String menuname) {
 		System.out.println("보드 컨트롤러 - 게시글 조회 함수 도착");
 		ModelAndView mv = new ModelAndView();
-
-		// 로그인 유저 확인
-		UserVo loginUser = boardService.userInfo(userid);
-
-		// 관리자 예외처리
-		if (loginUser.getUserid().equals("admin")) {
-			loginUser.setAdminToken("1");
-			System.out.println("로그인한 계정은 관리자입니다.");
-		} else if (!loginUser.getUserid().equals("admin")) {
-			loginUser.setAdminToken("0");
-			System.out.println("로그인한 계정은 일반 유저입니다.");
+		
+		// 비 로그인 체크
+		if (userid.equals("")) {
+			UserVo user = new UserVo();
+			mv.addObject("user", user);
+			
+		} else if (!userid.equals("")) {
+			// 로그인 유저 확인
+			UserVo loginUser = boardService.userInfo(userid);
+	
+			// 관리자 예외처리
+			if (loginUser.getUserid().equals("admin")) {
+				loginUser.setAdminToken("1");
+				System.out.println("로그인한 계정은 관리자입니다.");
+			} else if (!loginUser.getUserid().equals("admin")) {
+				loginUser.setAdminToken("0");
+				System.out.println("로그인한 계정은 일반 유저입니다.");
+			}
+			
+			mv.addObject("user", loginUser);
 		}
-
-		mv.addObject("user", loginUser);
-
+		
 		// 메뉴 조회하기
 		List<MenuVo> menuList = boardService.menuList();
 		mv.addObject("menu", menuList);
@@ -87,19 +95,26 @@ public class BoardController {
 		System.out.println("타입 : " + searchType + ", 검색어 : " + searchText);
 		ModelAndView mv = new ModelAndView();
 
-		// 로그인 유저 확인
-		UserVo loginUser = boardService.userInfo(userid);
-
-		// 관리자 예외처리
-		if (loginUser.getUserid().equals("admin")) {
-			loginUser.setAdminToken("1");
-			System.out.println("로그인한 계정은 관리자입니다.");
-		} else if (!loginUser.getUserid().equals("admin")) {
-			loginUser.setAdminToken("0");
-			System.out.println("로그인한 계정은 일반 유저입니다.");
+		// 비 로그인 체크
+		if (userid.equals("")) {
+			UserVo user = new UserVo();
+			mv.addObject("user", user);
+			
+		} else if (!userid.equals("")) {
+			// 로그인 유저 확인
+			UserVo loginUser = boardService.userInfo(userid);
+	
+			// 관리자 예외처리
+			if (loginUser.getUserid().equals("admin")) {
+				loginUser.setAdminToken("1");
+				System.out.println("로그인한 계정은 관리자입니다.");
+			} else if (!loginUser.getUserid().equals("admin")) {
+				loginUser.setAdminToken("0");
+				System.out.println("로그인한 계정은 일반 유저입니다.");
+			}
+			
+			mv.addObject("user", loginUser);
 		}
-
-		mv.addObject("user", loginUser);
 
 		// 메뉴 조회하기
 		List<MenuVo> menuList = boardService.menuList();
@@ -107,7 +122,6 @@ public class BoardController {
 
 		// 검색한 게시글 조회하기
 		List<BoardVo> searchList = boardService.search(searchType, searchText);
-		mv.addObject("board", searchList);
 		
 		// 게시글이 존재하지 않을 때 예외처리
 		if (searchList.isEmpty()) {
@@ -127,9 +141,26 @@ public class BoardController {
 		System.out.println("게시글 idx : " + boardidx);
 		ModelAndView mv = new ModelAndView();
 
-		// 로그인 유저 확인
-		UserVo loginUser = boardService.userInfo(userid);
-		mv.addObject("user", loginUser);
+		// 비 로그인 체크
+		if (userid.equals("")) {
+			UserVo user = new UserVo();
+			mv.addObject("user", user);
+			
+		} else if (!userid.equals("")) {
+			// 로그인 유저 확인
+			UserVo loginUser = boardService.userInfo(userid);
+	
+			// 관리자 예외처리
+			if (loginUser.getUserid().equals("admin")) {
+				loginUser.setAdminToken("1");
+				System.out.println("로그인한 계정은 관리자입니다.");
+			} else if (!loginUser.getUserid().equals("admin")) {
+				loginUser.setAdminToken("0");
+				System.out.println("로그인한 계정은 일반 유저입니다.");
+			}
+			
+			mv.addObject("user", loginUser);
+		}
 
 		// 게시글 정보 확인
 		BoardVo detail = boardService.detail(boardidx);
@@ -144,8 +175,19 @@ public class BoardController {
 		
 		// 조회수 체크 후 DB 수정
 		boardService.readCount(newcount, boardidx);
-
 		mv.addObject("detail", detail);
+		
+		// 댓글 정보 확인
+		List<ReplyVo> reply = boardService.reply(boardidx);
+		
+		// 댓글이 존재하지 않을 때 예외처리
+		if (reply.isEmpty()) {
+			System.out.println("댓글이 존재하지 않습니다.");
+			mv.addObject("reply", null);
+		} else {
+			mv.addObject("reply", reply);
+		}
+		
 		mv.setViewName("board/detail");
 		return mv;
 	}
@@ -153,10 +195,21 @@ public class BoardController {
 	@RequestMapping("UpdateForm")
 	public ModelAndView updateForm(@RequestParam String userid, String boardidx) {
 		System.out.println("보드 컨트롤러 - 게시글 수정 함수 도착");
+		System.out.println("수정 게시글 idx : " + boardidx);
 		ModelAndView mv = new ModelAndView();
 
 		// 로그인 유저 확인
 		UserVo loginUser = boardService.userInfo(userid);
+		
+		// 관리자 예외처리
+		if (loginUser.getUserid().equals("admin")) {
+			loginUser.setAdminToken("1");
+			System.out.println("로그인한 계정은 관리자입니다.");
+		} else if (!loginUser.getUserid().equals("admin")) {
+			loginUser.setAdminToken("0");
+			System.out.println("로그인한 계정은 일반 유저입니다.");
+		}
+		
 		mv.addObject("user", loginUser);
 
 		// 메뉴 조회하기
@@ -175,14 +228,14 @@ public class BoardController {
 	public ModelAndView update(@RequestParam HashMap<String, Object> map) {
 		System.out.println("보드 컨트롤러 - 게시글 수정 입력 함수 도착");
 		ModelAndView mv = new ModelAndView();
+		
 		boardService.update(map);
 
-		// detail()에 매개변수 userid 전달
+		// detail()에 매개변수 전달
 		String userid = (String) map.get("userid");
-		mv.addObject("userid", userid);
-
-		// detail()에 매개변수 boardidx 전달
 		String boardidx = (String) map.get("boardidx");
+		
+		mv.addObject("userid", userid);
 		mv.addObject("boardidx", boardidx);
 
 		mv.setViewName("redirect:/Board/Detail");
@@ -192,7 +245,7 @@ public class BoardController {
 	@RequestMapping("/Delete")
 	public ModelAndView delete(@RequestParam String userid, String boardidx) {
 		System.out.println("보드 컨트롤러 - 게시글 삭제 함수 도착");
-		System.out.println("삭제 메뉴 이름 : " + boardidx);
+		System.out.println("삭제 게시글 idx : " + boardidx);
 		ModelAndView mv = new ModelAndView();
 
 		boardService.delete(boardidx);
@@ -210,6 +263,16 @@ public class BoardController {
 
 		// 로그인 유저 확인
 		UserVo loginUser = boardService.userInfo(userid);
+		
+		// 관리자 예외처리
+		if (loginUser.getUserid().equals("admin")) {
+			loginUser.setAdminToken("1");
+			System.out.println("로그인한 계정은 관리자입니다.");
+		} else if (!loginUser.getUserid().equals("admin")) {
+			loginUser.setAdminToken("0");
+			System.out.println("로그인한 계정은 일반 유저입니다.");
+		}
+		
 		mv.addObject("user", loginUser);
 		
 		// 메뉴 조회하기
@@ -224,11 +287,13 @@ public class BoardController {
 	public ModelAndView write(@RequestParam HashMap<String, Object> map) {
 		System.out.println("보드 컨트롤러 - 게시글 작성 완료 함수 도착");
 		ModelAndView mv = new ModelAndView();
+		
 		boardService.write(map);
 
 		// list()에 매개변수 userid 전달
 		String userid = (String) map.get("boardwriter");
 		mv.addObject("userid", userid);
+		
 		mv.setViewName("redirect:/Board/List");
 		return mv;
 	}

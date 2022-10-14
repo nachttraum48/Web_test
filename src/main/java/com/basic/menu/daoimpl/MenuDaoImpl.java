@@ -24,7 +24,7 @@ public class MenuDaoImpl implements MenuDao {
 	
 	@Override
 	public MenuVo menuInfo(String menuname) {
-		MenuVo menuInfo = sqlSession.selectOne("Menu.info", menuname);
+		MenuVo menuInfo = sqlSession.selectOne("Menu.detail", menuname);
 		return menuInfo;
 	}
 

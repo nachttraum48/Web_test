@@ -13,7 +13,7 @@
 		FROM MENU ORDER BY IDX
  	</select>
  	
- 	<select id="info" resultType="com.basic.menu.vo.MenuVo">
+ 	<select id="detail" resultType="com.basic.menu.vo.MenuVo">
  		SELECT TO_CHAR(IDX) AS MENUIDX,
 		  TO_CHAR(NAME) AS MENUNAME,
 		  TO_CHAR(INDATE) AS MENUINDATE,
