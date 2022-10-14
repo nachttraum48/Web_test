@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.basic.board.service.BoardService;
 import com.basic.board.vo.BoardVo;
 import com.basic.menu.vo.MenuVo;
+import com.basic.page.vo.PageVo;
 import com.basic.reply.vo.ReplyVo;
 import com.basic.user.vo.UserVo;
 
@@ -44,10 +45,17 @@ public class BoardController {
 		return mv;
 	}
 	
+	// (required = false) -> 반드시 화면에서 넘어올 필요는 없다.
+	// (defaultValue = "1") -> 데이터가 없을 경우 기본값으로 "1"을 셋팅한다.
 	@RequestMapping("/List")
-	public ModelAndView list(@RequestParam String userid, String menuname) {
+	public ModelAndView list(@RequestParam(required = false, defaultValue = "1") int page,
+							 @RequestParam(required = false, defaultValue = "1") int range,
+							 String userid, String menuname, String searchType, String searchText) {
 		System.out.println("보드 컨트롤러 - 게시글 조회 함수 도착");
 		ModelAndView mv = new ModelAndView();
+		
+		System.out.println("[userid : " + userid + ", menuname : " + menuname + 
+						   ", searchType : " + searchType + ", searchText : " + searchText + "]");
 		
 		// 비 로그인 체크
 		if (userid.equals("")) {
@@ -55,6 +63,7 @@ public class BoardController {
 			mv.addObject("user", user);
 			
 		} else if (!userid.equals("")) {
+			
 			// 로그인 유저 확인
 			UserVo loginUser = boardService.userInfo(userid);
 	
@@ -73,9 +82,31 @@ public class BoardController {
 		// 메뉴 조회하기
 		List<MenuVo> menuList = boardService.menuList();
 		mv.addObject("menu", menuList);
-
+		
+		// menuname 값이 jsp에서 ""으로 보내면 null로 바꿔주기
+		if (menuname != null) {
+			if (menuname.equals("")) {
+				menuname = null;
+			}
+		}
+		// 메뉴를 골랐을 때를 고려하여 고른 메뉴 정보를 jsp로 보내기
+		mv.addObject("menuname", menuname);
+		
+		// 검색 했을 때를 고려하여 검색 정보를 jsp로 보내기
+		mv.addObject("searchType", searchType);
+		mv.addObject("searchText", searchText);
+		
+		// 게시글 총 개수 조회
+		int listCnt = boardService.listCnt(menuname, searchType, searchText);
+		
+		// 페이징 기능 실행
+		PageVo pagination = new PageVo();
+		pagination.pageInfo(page, range, listCnt);
+		mv.addObject("pagination", pagination);
+		System.out.println(pagination);
+		
 		// 게시글 조회하기
-		List<BoardVo> boardList = boardService.boardList(menuname);
+		List<BoardVo> boardList = boardService.boardList(menuname, pagination, searchType, searchText);
 		
 		// 게시글이 존재하지 않을 때 예외처리
 		if (boardList.isEmpty()) {
@@ -84,53 +115,7 @@ public class BoardController {
 		} else {
 			mv.addObject("board", boardList);
 		}
-
-		mv.setViewName("board/list");
-		return mv;
-	}
-
-	@RequestMapping("/Search")
-	public ModelAndView search(@RequestParam String userid, String searchType, String searchText) {
-		System.out.println("보드 컨트롤러 - 게시글 검색 함수 도착");
-		System.out.println("타입 : " + searchType + ", 검색어 : " + searchText);
-		ModelAndView mv = new ModelAndView();
-
-		// 비 로그인 체크
-		if (userid.equals("")) {
-			UserVo user = new UserVo();
-			mv.addObject("user", user);
-			
-		} else if (!userid.equals("")) {
-			// 로그인 유저 확인
-			UserVo loginUser = boardService.userInfo(userid);
-	
-			// 관리자 예외처리
-			if (loginUser.getUserid().equals("admin")) {
-				loginUser.setAdminToken("1");
-				System.out.println("로그인한 계정은 관리자입니다.");
-			} else if (!loginUser.getUserid().equals("admin")) {
-				loginUser.setAdminToken("0");
-				System.out.println("로그인한 계정은 일반 유저입니다.");
-			}
-			
-			mv.addObject("user", loginUser);
-		}
-
-		// 메뉴 조회하기
-		List<MenuVo> menuList = boardService.menuList();
-		mv.addObject("menu", menuList);
-
-		// 검색한 게시글 조회하기
-		List<BoardVo> searchList = boardService.search(searchType, searchText);
 		
-		// 게시글이 존재하지 않을 때 예외처리
-		if (searchList.isEmpty()) {
-			System.out.println("게시글이 존재하지 않습니다.");
-			mv.addObject("board", null);
-		} else {
-			mv.addObject("board", searchList);
-		}
-
 		mv.setViewName("board/list");
 		return mv;
 	}
@@ -147,6 +132,7 @@ public class BoardController {
 			mv.addObject("user", user);
 			
 		} else if (!userid.equals("")) {
+			
 			// 로그인 유저 확인
 			UserVo loginUser = boardService.userInfo(userid);
 	

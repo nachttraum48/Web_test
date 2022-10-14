@@ -12,6 +12,9 @@
 <script>
 	
 	var userid = `${user.userid}`;
+	var menuname = `${menuname}`;
+	var searchType = `${searchType}`;
+	var searchText = `${searchText}`;
 	
 	function writeBoard() {
 		if (userid == null || userid == '') {
@@ -24,6 +27,98 @@
 		if (!confirm('로그아웃 하시겠습니까?')) {
 			return false;
 		}
+	}
+	
+	// 이전 버튼 이벤트
+	function prev(page, range, rangeSize) {
+		
+		// page, range 값 수정
+		var page = ((range - 2) * rangeSize) + 1;
+		var range = range - 1;
+		
+		// form 생성
+		var f = document.createElement('Form');		f.action = '/Board/List';	f.method = 'post';
+		
+		// form으로 보낼 값 설정
+		var input1 = document.createElement('input');	var input2 = document.createElement('input');
+		var input3 = document.createElement('input');	var input4 = document.createElement('input');
+		var input5 = document.createElement('input');	var input6 = document.createElement('input');
+		
+		input1.setAttribute('type', 'hidden');	input1.setAttribute('name', 'page');		input1.setAttribute('value', page);
+		input2.setAttribute('type', 'hidden');	input2.setAttribute('name', 'range');		input2.setAttribute('value', range);
+		input3.setAttribute('type', 'hidden');	input3.setAttribute('name', 'userid');		input3.setAttribute('value', userid);
+		input4.setAttribute('type', 'hidden');	input4.setAttribute('name', 'menuname');	input4.setAttribute('value', menuname);
+		input5.setAttribute('type', 'hidden');	input5.setAttribute('name', 'searchType');	input5.setAttribute('value', searchType);
+		input6.setAttribute('type', 'hidden');	input6.setAttribute('name', 'searchText');	input6.setAttribute('value', searchText);
+		
+		// form에 보낼 값 입력
+		f.appendChild(input1);	f.appendChild(input2);	f.appendChild(input3);
+		f.appendChild(input4);	f.appendChild(input5);	f.appendChild(input6);
+		
+		// 태그를 html에 붙여서 form 제출
+		document.body.appendChild(f);
+		f.submit();
+	}
+	
+	// 페이지 번호 클릭
+	function pagination(idx, range) {
+		
+		// page 값 수정
+		var page = idx;
+		
+		// form 생성
+		var f = document.createElement('Form');		f.action = '/Board/List';	f.method = 'post';
+		
+		// form으로 보낼 값 설정
+		var input1 = document.createElement('input');	var input2 = document.createElement('input');
+		var input3 = document.createElement('input');	var input4 = document.createElement('input');
+		var input5 = document.createElement('input');	var input6 = document.createElement('input');
+		
+		input1.setAttribute('type', 'hidden');	input1.setAttribute('name', 'page');		input1.setAttribute('value', page);
+		input2.setAttribute('type', 'hidden');	input2.setAttribute('name', 'range');		input2.setAttribute('value', range);
+		input3.setAttribute('type', 'hidden');	input3.setAttribute('name', 'userid');		input3.setAttribute('value', userid);
+		input4.setAttribute('type', 'hidden');	input4.setAttribute('name', 'menuname');	input4.setAttribute('value', menuname);
+		input5.setAttribute('type', 'hidden');	input5.setAttribute('name', 'searchType');	input5.setAttribute('value', searchType);
+		input6.setAttribute('type', 'hidden');	input6.setAttribute('name', 'searchText');	input6.setAttribute('value', searchText);
+		
+		// form에 보낼 값 입력
+		f.appendChild(input1);	f.appendChild(input2);	f.appendChild(input3);
+		f.appendChild(input4);	f.appendChild(input5);	f.appendChild(input6);
+		
+		// 태그를 html에 붙여서 form 제출
+		document.body.appendChild(f);
+		f.submit();
+	}
+	
+	// 다음 버튼 이벤트
+	function next(page, range, rangeSize) {
+		
+		// page, range 값 수정
+		var page = parseInt((range * rangeSize)) + 1;
+		var range = parseInt(range) + 1;
+		
+		// form 생성
+		var f = document.createElement('Form');		f.action = '/Board/List';	f.method = 'post';
+		
+		// form으로 보낼 값 설정
+		var input1 = document.createElement('input');	var input2 = document.createElement('input');
+		var input3 = document.createElement('input');	var input4 = document.createElement('input');
+		var input5 = document.createElement('input');	var input6 = document.createElement('input');
+		
+		input1.setAttribute('type', 'hidden');	input1.setAttribute('name', 'page');		input1.setAttribute('value', page);
+		input2.setAttribute('type', 'hidden');	input2.setAttribute('name', 'range');		input2.setAttribute('value', range);
+		input3.setAttribute('type', 'hidden');	input3.setAttribute('name', 'userid');		input3.setAttribute('value', userid);
+		input4.setAttribute('type', 'hidden');	input4.setAttribute('name', 'menuname');	input4.setAttribute('value', menuname);
+		input5.setAttribute('type', 'hidden');	input5.setAttribute('name', 'searchType');	input5.setAttribute('value', searchType);
+		input6.setAttribute('type', 'hidden');	input6.setAttribute('name', 'searchText');	input6.setAttribute('value', searchText);
+		
+		// form에 보낼 값 입력
+		f.appendChild(input1);	f.appendChild(input2);	f.appendChild(input3);
+		f.appendChild(input4);	f.appendChild(input5);	f.appendChild(input6);
+		
+		// 태그를 html에 붙여서 form 제출
+		document.body.appendChild(f);
+		f.submit();
 	}
 	
 </script>
@@ -130,8 +225,9 @@
 	</table>
 	<br>
 	<!-- 게시글 검색 -->
-	<form action="/Board/Search" method="POST">
+	<form action="/Board/List" method="POST">
 	  	<input type="hidden" value="${user.userid}" name="userid">
+	  	<input type="hidden" value="${menuname}" name="menuname">
 	  	
 		<select name="searchType">
 	       <option value="title" selected>제목</option>
@@ -142,6 +238,21 @@
 	  	<input type="text" name="searchText">
 		<input type="submit" value="검색">
 	</form>
+	<br>
+	<!-- 페이징 기능 -->
+	<div style="margin-left:20px;">
+		<c:if test="${pagination.prev}">
+			<a href="javascript:prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">prev</a>
+		</c:if>
+		
+		<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
+			<a href="javascript:pagination('${idx}', '${pagination.range}')">${idx}</a>
+		</c:forEach>
+		
+		<c:if test="${pagination.next}">
+			<a href="javascript:next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">next</a>
+		</c:if>
+	</div>
 	<br>
 	<form action="/Board/WriteForm" method="POST" onsubmit="return writeBoard();">
 		<input type="hidden" value="${user.userid}" name="userid">

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.basic.board.vo.BoardVo;
 import com.basic.menu.vo.MenuVo;
+import com.basic.page.vo.PageVo;
 import com.basic.reply.vo.ReplyVo;
 import com.basic.user.vo.UserVo;
 
@@ -17,10 +18,10 @@ public interface BoardService {
 	List<MenuVo> menuList();
 	
 	// 게시글 조회
-	List<BoardVo> boardList(String menuname);
+	List<BoardVo> boardList(String menuname, PageVo pagination, String searchType, String searchText);
 	
-	// 검색한 게시글 조회
-	List<BoardVo> search(String searchType, String searchText);
+	// 게시글 총 개수 조회
+	int listCnt(String menuname, String searchType, String searchText);
 	
 	// 게시글 상세 페이지
 	BoardVo detail(String boardidx);

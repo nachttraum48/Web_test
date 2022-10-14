@@ -10,6 +10,7 @@ import com.basic.board.dao.BoardDao;
 import com.basic.board.service.BoardService;
 import com.basic.board.vo.BoardVo;
 import com.basic.menu.vo.MenuVo;
+import com.basic.page.vo.PageVo;
 import com.basic.reply.vo.ReplyVo;
 import com.basic.user.vo.UserVo;
 
@@ -32,17 +33,17 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public List<BoardVo> boardList(String menuname) {
-		List<BoardVo> boardList = boardDao.boardList(menuname);
+	public List<BoardVo> boardList(String menuname, PageVo pagination, String searchType, String searchText) {
+		List<BoardVo> boardList = boardDao.boardList(menuname, pagination, searchType, searchText);
 		return boardList;
 	}
 	
 	@Override
-	public List<BoardVo> search(String searchType, String searchText) {
-		List<BoardVo> searchList = boardDao.search(searchType, searchText);
-		return searchList;
+	public int listCnt(String menuname, String searchType, String searchText) {
+		int listCnt = boardDao.listCnt(menuname, searchType, searchText);
+		return listCnt;
 	}
-
+	
 	@Override
 	public BoardVo detail(String boardidx) {
 		BoardVo detail = boardDao.detail(boardidx);

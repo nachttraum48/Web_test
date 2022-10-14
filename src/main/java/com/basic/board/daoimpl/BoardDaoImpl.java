@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.basic.board.dao.BoardDao;
 import com.basic.board.vo.BoardVo;
 import com.basic.menu.vo.MenuVo;
+import com.basic.page.vo.PageVo;
 import com.basic.reply.vo.ReplyVo;
 import com.basic.user.vo.UserVo;
 
@@ -32,22 +33,34 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	@Override
-	public List<BoardVo> boardList(String menuname) {
-		List<BoardVo> boardList = sqlSession.selectList("Board.list", menuname);
+	public List<BoardVo> boardList(String menuname, PageVo pagination, String searchType, String searchText) {
+		
+		int startList = pagination.getStartList();
+		int endList = pagination.getEndList();
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("menuname", menuname);
+		map.put("startList", startList);
+		map.put("endList", endList);
+		map.put("searchType", searchType);
+		map.put("searchText", searchText);
+		
+		List<BoardVo> boardList = sqlSession.selectList("Board.list", map);
 		return boardList;
 	}
 	
 	@Override
-	public List<BoardVo> search(String searchType, String searchText) {
+	public int listCnt(String menuname, String searchType, String searchText) {
 		
 		HashMap<String, Object> map = new HashMap<>();
+		map.put("menuname", menuname);
 		map.put("searchType", searchType);
 		map.put("searchText", searchText);
 		
-		List<BoardVo> searchList = sqlSession.selectList("Board.search", map);
-		return searchList;
+		int listCnt = sqlSession.selectOne("Board.listCnt", map);
+		return listCnt;
 	}
-
+	
 	@Override
 	public BoardVo detail(String boardidx) {
 		BoardVo detail = sqlSession.selectOne("Board.detail", boardidx);
