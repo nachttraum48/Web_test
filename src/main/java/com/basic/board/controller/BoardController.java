@@ -50,12 +50,10 @@ public class BoardController {
 	@RequestMapping("/List")
 	public ModelAndView list(@RequestParam(required = false, defaultValue = "1") int page,
 							 @RequestParam(required = false, defaultValue = "1") int range,
+							 @RequestParam(required = false, defaultValue = "10") int listSize,
 							 String userid, String menuname, String searchType, String searchText) {
 		System.out.println("보드 컨트롤러 - 게시글 조회 함수 도착");
 		ModelAndView mv = new ModelAndView();
-		
-		System.out.println("[userid : " + userid + ", menuname : " + menuname + 
-						   ", searchType : " + searchType + ", searchText : " + searchText + "]");
 		
 		// 비 로그인 체크
 		if (userid.equals("")) {
@@ -89,32 +87,24 @@ public class BoardController {
 				menuname = null;
 			}
 		}
-		// 메뉴를 골랐을 때를 고려하여 고른 메뉴 정보를 jsp로 보내기
-		mv.addObject("menuname", menuname);
-		
-		// 검색 했을 때를 고려하여 검색 정보를 jsp로 보내기
-		mv.addObject("searchType", searchType);
-		mv.addObject("searchText", searchText);
-		
 		// 게시글 총 개수 조회
 		int listCnt = boardService.listCnt(menuname, searchType, searchText);
 		
 		// 페이징 기능 실행
 		PageVo pagination = new PageVo();
+		pagination.setListSize(listSize);
 		pagination.pageInfo(page, range, listCnt);
 		mv.addObject("pagination", pagination);
-		System.out.println(pagination);
 		
 		// 게시글 조회하기
 		List<BoardVo> boardList = boardService.boardList(menuname, pagination, searchType, searchText);
+		mv.addObject("board", boardList);
 		
-		// 게시글이 존재하지 않을 때 예외처리
-		if (boardList.isEmpty()) {
-			System.out.println("게시글이 존재하지 않습니다.");
-			mv.addObject("board", null);
-		} else {
-			mv.addObject("board", boardList);
-		}
+		// 각종 정보를 jsp로 보내기
+		mv.addObject("listSize", listSize);       // 리스트 개수 골랐을 때를 고려
+		mv.addObject("menuname", menuname);       // 메뉴 골랐을 때를 고려
+		mv.addObject("searchType", searchType);   // 검색 했을 때를 고려
+		mv.addObject("searchText", searchText);   // 검색 했을 때를 고려
 		
 		mv.setViewName("board/list");
 		return mv;
@@ -165,14 +155,7 @@ public class BoardController {
 		
 		// 댓글 정보 확인
 		List<ReplyVo> reply = boardService.reply(boardidx);
-		
-		// 댓글이 존재하지 않을 때 예외처리
-		if (reply.isEmpty()) {
-			System.out.println("댓글이 존재하지 않습니다.");
-			mv.addObject("reply", null);
-		} else {
-			mv.addObject("reply", reply);
-		}
+		mv.addObject("reply", reply);
 		
 		mv.setViewName("board/detail");
 		return mv;

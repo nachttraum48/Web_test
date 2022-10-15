@@ -11,6 +11,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	
+	var listSize = `${listSize}`;
 	var userid = `${user.userid}`;
 	var menuname = `${menuname}`;
 	var searchType = `${searchType}`;
@@ -43,17 +44,19 @@
 		var input1 = document.createElement('input');	var input2 = document.createElement('input');
 		var input3 = document.createElement('input');	var input4 = document.createElement('input');
 		var input5 = document.createElement('input');	var input6 = document.createElement('input');
+		var input7 = document.createElement('input');
 		
 		input1.setAttribute('type', 'hidden');	input1.setAttribute('name', 'page');		input1.setAttribute('value', page);
 		input2.setAttribute('type', 'hidden');	input2.setAttribute('name', 'range');		input2.setAttribute('value', range);
-		input3.setAttribute('type', 'hidden');	input3.setAttribute('name', 'userid');		input3.setAttribute('value', userid);
-		input4.setAttribute('type', 'hidden');	input4.setAttribute('name', 'menuname');	input4.setAttribute('value', menuname);
-		input5.setAttribute('type', 'hidden');	input5.setAttribute('name', 'searchType');	input5.setAttribute('value', searchType);
-		input6.setAttribute('type', 'hidden');	input6.setAttribute('name', 'searchText');	input6.setAttribute('value', searchText);
+		input3.setAttribute('type', 'hidden');	input3.setAttribute('name', 'listSize');	input3.setAttribute('value', listSize);
+		input4.setAttribute('type', 'hidden');	input4.setAttribute('name', 'userid');		input4.setAttribute('value', userid);
+		input5.setAttribute('type', 'hidden');	input5.setAttribute('name', 'menuname');	input5.setAttribute('value', menuname);
+		input6.setAttribute('type', 'hidden');	input6.setAttribute('name', 'searchType');	input6.setAttribute('value', searchType);
+		input7.setAttribute('type', 'hidden');	input7.setAttribute('name', 'searchText');	input7.setAttribute('value', searchText);
 		
 		// form에 보낼 값 입력
-		f.appendChild(input1);	f.appendChild(input2);	f.appendChild(input3);
-		f.appendChild(input4);	f.appendChild(input5);	f.appendChild(input6);
+		f.appendChild(input1);	f.appendChild(input2);	f.appendChild(input3);	f.appendChild(input4);
+		f.appendChild(input5);	f.appendChild(input6);	f.appendChild(input7);
 		
 		// 태그를 html에 붙여서 form 제출
 		document.body.appendChild(f);
@@ -73,17 +76,19 @@
 		var input1 = document.createElement('input');	var input2 = document.createElement('input');
 		var input3 = document.createElement('input');	var input4 = document.createElement('input');
 		var input5 = document.createElement('input');	var input6 = document.createElement('input');
+		var input7 = document.createElement('input');
 		
 		input1.setAttribute('type', 'hidden');	input1.setAttribute('name', 'page');		input1.setAttribute('value', page);
 		input2.setAttribute('type', 'hidden');	input2.setAttribute('name', 'range');		input2.setAttribute('value', range);
-		input3.setAttribute('type', 'hidden');	input3.setAttribute('name', 'userid');		input3.setAttribute('value', userid);
-		input4.setAttribute('type', 'hidden');	input4.setAttribute('name', 'menuname');	input4.setAttribute('value', menuname);
-		input5.setAttribute('type', 'hidden');	input5.setAttribute('name', 'searchType');	input5.setAttribute('value', searchType);
-		input6.setAttribute('type', 'hidden');	input6.setAttribute('name', 'searchText');	input6.setAttribute('value', searchText);
+		input3.setAttribute('type', 'hidden');	input3.setAttribute('name', 'listSize');	input3.setAttribute('value', listSize);
+		input4.setAttribute('type', 'hidden');	input4.setAttribute('name', 'userid');		input4.setAttribute('value', userid);
+		input5.setAttribute('type', 'hidden');	input5.setAttribute('name', 'menuname');	input5.setAttribute('value', menuname);
+		input6.setAttribute('type', 'hidden');	input6.setAttribute('name', 'searchType');	input6.setAttribute('value', searchType);
+		input7.setAttribute('type', 'hidden');	input7.setAttribute('name', 'searchText');	input7.setAttribute('value', searchText);
 		
 		// form에 보낼 값 입력
-		f.appendChild(input1);	f.appendChild(input2);	f.appendChild(input3);
-		f.appendChild(input4);	f.appendChild(input5);	f.appendChild(input6);
+		f.appendChild(input1);	f.appendChild(input2);	f.appendChild(input3);	f.appendChild(input4);
+		f.appendChild(input5);	f.appendChild(input6);	f.appendChild(input7);
 		
 		// 태그를 html에 붙여서 form 제출
 		document.body.appendChild(f);
@@ -104,17 +109,19 @@
 		var input1 = document.createElement('input');	var input2 = document.createElement('input');
 		var input3 = document.createElement('input');	var input4 = document.createElement('input');
 		var input5 = document.createElement('input');	var input6 = document.createElement('input');
+		var input7 = document.createElement('input');
 		
 		input1.setAttribute('type', 'hidden');	input1.setAttribute('name', 'page');		input1.setAttribute('value', page);
 		input2.setAttribute('type', 'hidden');	input2.setAttribute('name', 'range');		input2.setAttribute('value', range);
-		input3.setAttribute('type', 'hidden');	input3.setAttribute('name', 'userid');		input3.setAttribute('value', userid);
-		input4.setAttribute('type', 'hidden');	input4.setAttribute('name', 'menuname');	input4.setAttribute('value', menuname);
-		input5.setAttribute('type', 'hidden');	input5.setAttribute('name', 'searchType');	input5.setAttribute('value', searchType);
-		input6.setAttribute('type', 'hidden');	input6.setAttribute('name', 'searchText');	input6.setAttribute('value', searchText);
+		input3.setAttribute('type', 'hidden');	input3.setAttribute('name', 'listSize');	input3.setAttribute('value', listSize);
+		input4.setAttribute('type', 'hidden');	input4.setAttribute('name', 'userid');		input4.setAttribute('value', userid);
+		input5.setAttribute('type', 'hidden');	input5.setAttribute('name', 'menuname');	input5.setAttribute('value', menuname);
+		input6.setAttribute('type', 'hidden');	input6.setAttribute('name', 'searchType');	input6.setAttribute('value', searchType);
+		input7.setAttribute('type', 'hidden');	input7.setAttribute('name', 'searchText');	input7.setAttribute('value', searchText);
 		
 		// form에 보낼 값 입력
-		f.appendChild(input1);	f.appendChild(input2);	f.appendChild(input3);
-		f.appendChild(input4);	f.appendChild(input5);	f.appendChild(input6);
+		f.appendChild(input1);	f.appendChild(input2);	f.appendChild(input3);	f.appendChild(input4);
+		f.appendChild(input5);	f.appendChild(input6);	f.appendChild(input7);
 		
 		// 태그를 html에 붙여서 form 제출
 		document.body.appendChild(f);
@@ -127,20 +134,17 @@
 <body>
 	<!-- 비 로그인 상태일 시 출력 -->
 	<c:if test="${user.userid eq null}">
-		
 		<h2 style="float:left; margin-right:545px;">게시판</h2>
 		
 		<form style="float:left; margin-top:25px;" action="/Login/LoginForm" method="POST">
 		 	<input type="submit" value="로그인">
 		</form>
-		
 	</c:if>
 	
 	<!-- 로그인 상태일 시 출력 -->
 	<c:if test="${user.userid ne null}">
 		<h2 style="float:left; margin-right:365px;">게시판</h2>
 		
-		<!-- 로그인 유저 정보 -->
 		<span style="float:left; margin-top:25px; margin-right:10px;"><strong>${user.username}</strong>님</span>
 		
 		<form style="float:left; margin-top:25px; margin-right:10px;" action="/Login/Logout" method="POST" onsubmit="return logout();">
@@ -164,17 +168,20 @@
 		</c:if>
 	</c:if><br><br><br><br>
 	
+	<!-- 관리자만 메뉴 편집 가능하도록 설정 -->
 	<c:if test="${user.adminToken ne null && user.adminToken eq '1'}">
 		<a href="/Menu/List">메뉴 편집</a>
 		<br>
 		<br>
 	</c:if>
+	
 	<!-- 메뉴 테이블 -->
 	<table border="1">
 		<tr>
 		<th>
 		<form action="/Board/List" method="POST">
 			<input type="hidden" value="${user.userid}" name="userid">
+			<input type="hidden" value="${listSize}" name="listSize">
 			<input style="border: none; background: transparent;" type="submit" value="전체">
 		</form>
 		</th>
@@ -183,6 +190,7 @@
 			<form action="/Board/List" method="POST">
 				<input type="hidden" value="${user.userid}" name="userid">
 				<input type="hidden" value="${m.menuname}" name="menuname">
+				<input type="hidden" value="${listSize}" name="listSize">
 				<input style="border: none; background: transparent;" type="submit" value="${m.menuname}">
 			</form>
 			</th>
@@ -190,6 +198,49 @@
 		</tr>
 	</table>
 	<br>
+	
+	<!-- 페이지에 보일 리스트 개수 결정 -->
+	<form action="/Board/List" method="POST">
+		<input type="hidden" value="${user.userid}" name="userid">
+	  	<input type="hidden" value="${menuname}" name="menuname">
+	  	<input type="hidden" value="${searchType}" name="searchType">
+	  	<input type="hidden" value="${searchText}" name="searchText">
+	  	
+		<c:if test="${listSize eq '10'}">
+			<select name="listSize" onchange="this.form.submit()">
+		       <option value="10" selected>10개씩 보기</option>
+		       <option value="20">20개씩 보기</option>
+		       <option value="30">30개씩 보기</option>
+		       <option value="40">40개씩 보기</option>
+		  	</select>
+	  	</c:if>
+		<c:if test="${listSize eq '20'}">
+			<select name="listSize" onchange="this.form.submit()">
+		       <option value="10">10개씩 보기</option>
+		       <option value="20" selected>20개씩 보기</option>
+		       <option value="30">30개씩 보기</option>
+		       <option value="40">40개씩 보기</option>
+		  	</select>
+	  	</c:if>
+		<c:if test="${listSize eq '30'}">
+			<select name="listSize" onchange="this.form.submit()">
+		       <option value="10">10개씩 보기</option>
+		       <option value="20">20개씩 보기</option>
+		       <option value="30" selected>30개씩 보기</option>
+		       <option value="40">40개씩 보기</option>
+		  	</select>
+	  	</c:if>
+		<c:if test="${listSize eq '40'}">
+			<select name="listSize" onchange="this.form.submit()">
+		       <option value="10">10개씩 보기</option>
+		       <option value="20">20개씩 보기</option>
+		       <option value="30">30개씩 보기</option>
+		       <option value="40" selected>40개씩 보기</option>
+		  	</select>
+	  	</c:if>
+  	</form>
+	<br>
+	
 	<!-- 게시글 테이블 -->
 	<table border="1" >
 		<tr>
@@ -219,47 +270,75 @@
 			</tr>
 		</c:forEach>
 		
-		<c:if test="${board eq null}">
+		<!-- 게시글이 존재하지 않을 경우 예외처리 -->
+		<c:if test="${empty board}">
 			<tr><td style="background:lightgray;" height="80" colspan="7" align=center><b>게시글이 존재하지 않습니다.</b></td></tr>
 		</c:if>
 	</table>
 	<br>
-	<!-- 게시글 검색 -->
+	
+	<!-- 게시글 검색 기능 -->
 	<form action="/Board/List" method="POST">
 	  	<input type="hidden" value="${user.userid}" name="userid">
 	  	<input type="hidden" value="${menuname}" name="menuname">
+	  	<input type="hidden" value="${listSize}" name="listSize">
 	  	
-		<select name="searchType">
-	       <option value="title" selected>제목</option>
-	       <option value="content">내용</option>
-	       <option value="writer">작성자</option>
-	  	</select>
+	  	<!-- 페이지 이동해도 검색했을 때의 기록 남기기 -->
+	  	<c:if test="${searchType eq null || searchType eq 'title'}">
+			<select name="searchType">
+		       <option value="title" selected>제목</option>
+		       <option value="content">내용</option>
+		       <option value="writer">작성자</option>
+		  	</select>
+	  	</c:if>
+	  	<c:if test="${searchType eq 'content'}">
+			<select name="searchType">
+		       <option value="title">제목</option>
+		       <option value="content" selected>내용</option>
+		       <option value="writer">작성자</option>
+		  	</select>
+	  	</c:if>
+	  	<c:if test="${searchType eq 'writer'}">
+			<select name="searchType">
+		       <option value="title">제목</option>
+		       <option value="content">내용</option>
+		       <option value="writer" selected>작성자</option>
+		  	</select>
+	  	</c:if>
 	  	
-	  	<input type="text" name="searchText">
+	  	<input type="text" value="${searchText}" name="searchText">
 		<input type="submit" value="검색">
 	</form>
 	<br>
+	
 	<!-- 페이징 기능 -->
 	<div style="margin-left:20px;">
+	
+		<!-- 이전 버튼 -->
 		<c:if test="${pagination.prev}">
 			<a href="javascript:prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">prev</a>
 		</c:if>
 		
+		<!-- 각 페이지 별 페이징 기능 -->
 		<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
 			<a href="javascript:pagination('${idx}', '${pagination.range}')">${idx}</a>
 		</c:forEach>
 		
+		<!-- 다음 버튼 -->
 		<c:if test="${pagination.next}">
 			<a href="javascript:next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">next</a>
 		</c:if>
 	</div>
 	<br>
+	
+	<!-- 글쓰기 버튼 - 비 로그인 시 로그인 하라는 안내문자 출력 및 작성 못하도록 설정 -->
 	<form action="/Board/WriteForm" method="POST" onsubmit="return writeBoard();">
 		<input type="hidden" value="${user.userid}" name="userid">
 		<input type="submit" value="글쓰기">
 	</form>
 	<br>
-	<!-- 비 로그인 시 메인화면 다르게 출력 -->
+	
+	<!-- 메인화면 버튼 - 비 로그인 시 메인화면 다르게 출력 -->
 	<c:if test="${user.userid eq null}">
 		<form action="/" method="POST">
 			<input type="submit" value="메인화면">
@@ -271,5 +350,6 @@
 			<input type="submit" value="메인화면">
 		</form>
 	</c:if>
+	
 </body>
 </html>

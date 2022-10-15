@@ -42,7 +42,6 @@
 				<input type="submit" value="마이페이지">
 			</form>
 		</c:if>
-	
 		<c:if test="${user.adminToken eq '1'}">
 			<form style="float:left; margin-top:25px;" action="/User/List" method="POST">
 				<input type="submit" value="회원관리">

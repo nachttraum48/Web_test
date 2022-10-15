@@ -2,10 +2,10 @@ package com.basic.page.vo;
 
 public class PageVo {
 	
-	private int listSize = 10;   // 한 페이지당 보여질 게시글의 개수
-	private int rangeSize = 10;  // 한 범위에 보여질 페이지의 개수
+	private int listSize = 10;   // 한 페이지당 보여질 게시글의 개수 (default를 10으로 설정)
+	private int rangeSize = 10;  // 한 범위에 보여질 페이지의 개수   (default를 10으로 설정)
 	private int page;            // 현재 페이지 번호
-	private int range;           // 각 범위의 갯수 ( 1~10 1개, 11~20 1개, ... )
+	private int range;           // 각 범위 당 번호 (rangeSize = 10 기준 : 1~10 1번, 11~20 2번, ...)
 	private int listCnt;         // 전체 게시물의 개수
 	private int pageCnt;         // 전체 페이지의 개수
 	private int startPage;       // 각 페이지 범위 시작 번호

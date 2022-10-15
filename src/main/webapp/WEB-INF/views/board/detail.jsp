@@ -11,15 +11,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	
-	var userid = `${user.userid}`;
-	
 	function writeReply() {
-		if (userid == null || userid == '') {
-			alert('로그인이 필요한 서비스입니다.');
-			return false;
-		} else {
-			alert('댓글이 작성 되었습니다.');
-		}
+		alert('댓글이 작성 되었습니다.');
 	}
 	
 	function logout() {
@@ -50,21 +43,17 @@
 <body>
 	<!-- 비 로그인 상태일 시 출력 -->
 	<c:if test="${user.userid eq null}">
-		
 		<h2 style="float:left; margin-right:440px;">게시글 상세보기</h2>
 		
 		<form style="float:left; margin-top:25px;" action="/Login/LoginForm" method="POST">
 		 	<input type="submit" value="로그인">
 		</form>
-		
 	</c:if>
 	
 	<!-- 로그인 상태일 시 출력 -->
 	<c:if test="${user.userid ne null}">
-		
 		<h2 style="float:left; margin-right:261px;">게시글 상세보기</h2>
 		
-		<!-- 로그인 유저 정보 -->
 		<span style="float:left; margin-top:25px; margin-right:10px;"><strong>${user.username}</strong>님</span>
 		
 		<form style="float:left; margin-top:25px; margin-right:10px;" action="/Login/Logout" method="POST" onsubmit="return logout();">
@@ -79,7 +68,6 @@
 					<input type="submit" value="마이페이지">
 				</form>
 			</c:if>
-		
 			<c:if test="${user.adminToken eq '1'}">
 				<form style="float:left; margin-top:25px;" action="/User/List" method="POST">
 					<input type="submit" value="회원관리">
@@ -87,7 +75,6 @@
 			</c:if>
 			
 		</c:if>
-		
 	</c:if><br><br><br>
 	
 	<h3>제목 : ${detail.boardtitle}</h3>
@@ -101,7 +88,8 @@
 	
 	<textarea cols="100" rows="30" readonly="readonly">${detail.boardcontent}</textarea>
 	<br><br>
-	<c:if test="${reply ne null}">
+	
+	<c:if test="${not empty reply}">
 		<div><b>댓글</b></div>
 		<table border="1">
 			<tr>
@@ -136,14 +124,15 @@
 	</c:if>
 	<br>
 	<br>
-	<form action="/Reply/Write" method="POST" onsubmit="return writeReply();">
-		<input type="hidden" value="${user.userid}" name="userid">
-		<input type="hidden" value="${detail.boardidx}" name="boardidx">
-		<textarea style="float:left; margin-right:10px;" cols="80" rows="6" name="replycontent" required></textarea>
-		<input type="submit" value="댓글 작성">
-	</form>
-	
-	<br><br><br><br><br>
+	<!-- 로그인 하지 않으면 댓글 작성 못하도록 설정 -->
+	<c:if test="${user.userid ne null && user.userid ne ''}">
+		<form action="/Reply/Write" method="POST" onsubmit="return writeReply();">
+			<input type="hidden" value="${user.userid}" name="userid">
+			<input type="hidden" value="${detail.boardidx}" name="boardidx">
+			<textarea style="float:left; margin-right:10px;" cols="80" rows="6" name="replycontent" required></textarea>
+			<input type="submit" value="댓글 작성">
+		</form>
+	<br><br><br><br><br></c:if>
 	
 	<!-- 게시글 작성자만 게시글 수정 및 삭제 하도록 설정 -->
 	<c:if test="${user.userid eq detail.boardwriter}">
